@@ -91,7 +91,7 @@ main{
 .quemSomos, .nossaSolucao{
     width: 100%;
     height: 100vh;
-    background-color: blue;
+    background-image: linear-gradient( to right, #D1b7ea, #B987e8 );
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -136,12 +136,16 @@ main{
 
 .txtQuemSomos, .txtNossaSolucao{
     width: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 10px;
 }
 
 .nossaSolucao{
     width: 100%;
     height: 100vh;
-    background-color: blueviolet;
+    background-image: linear-gradient( to left, #D1b7ea, #B987e8 );
 }
 
 .content1{
