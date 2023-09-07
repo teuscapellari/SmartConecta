@@ -37,7 +37,11 @@
 }
 
 .form-popup h1{
-    font-size: 10px;
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+
 }
 
 /* Add styles to the form container */
@@ -72,6 +76,7 @@
   width: 100%;
   margin-bottom:10px;
   opacity: 0.8;
+  font-weight: bold;
 }
 
 /* Add a red background color to the cancel button */
@@ -100,10 +105,10 @@
         <div class="contentHome">
             <div class="registros">
                 <div class="regDesp">
-                    <p onclick="openForm()">Registrar Despesa</p>
+                    <p onclick="openDesp()">Registrar Despesa</p>
                 </div>
                 <div class="regEntr">
-                    <p>Registrar Entrada</p>
+                  <p onclick="openEntr()">Registrar Entrada</p>
                 </div>
             </div>
 
@@ -117,33 +122,72 @@
             </div>
 
 
-    <div class="form-popup" id="myForm">
+    <div class="form-popup" id="myDesp">
     <form action="/action_page.php" class="form-container">
         <h1>Registrar Despesa</h1>
 
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <label for="title">Nome: </label>
+        <input type="text" placeholder="Nome Despesa" name="text" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <label for="psw">Data: </label>
+        <input type="date" placeholder="00/00/0000" name="date" required>
+        <p></p>
+        <label for="appt">Horário Despesa: </label>
 
-        <button type="submit" class="btn">Login</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+      <p></p>
+
+        <label for="psw">Descrição: </label>
+        <textarea id="desc" name="descr" rows="4" cols="50"></textarea>
+
+        <button type="submit" class="btn">REGISTRAR</button>
+        <button type="button" class="btn cancel" onclick="closeDesp()">Sair</button>
     </form>
             </div>
         </div>
+
+        <div class="form-popup" id="myEntr">
+          <form action="/action_page.php" class="form-container">
+              <h1>Registrar Despesa</h1>
+      
+              <label for="title">Nome: </label>
+              <input type="text" placeholder="Nome Despesa" name="text" required>
+      
+              <label for="psw">Data: </label>
+              <input type="date" placeholder="00/00/0000" name="date" required>
+              <p></p>
+              <label for="appt">Horário Entrada: </label>
+      
+            <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+            <p></p>
+      
+              <label for="psw">Descrição: </label>
+              <textarea id="desc" name="descr" rows="4" cols="50"></textarea>
+      
+              <button type="submit" class="btn">REGISTRAR</button>
+              <button type="button" class="btn cancel" onclick="closeEntr()">Sair</button>
+          </form>
+                  </div>
+              </div>
         
 </body>
 </html>
 
 <script>
 
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
+function openDesp() {
+  document.getElementById("myDesp").style.display = "block";
 }
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
+function closeDesp() {
+  document.getElementById("myDesp").style.display = "none";
+}
+function openEntr() {
+  document.getElementById("myEntr").style.display = "block";
+}
+
+function closeEntr() {
+  document.getElementById("myEntr").style.display = "none";
 }
 
   </script>
