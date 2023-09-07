@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar-se</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="./js/funcoes.js"></script>
+</head>
+<body>
+
+    <header>
+        <div class="header login">
+            <img src="assets/" alt="">
+            <a href="index.html"><h2>SmartConecta</h2></a>
+
+            <ul>
+                <li>Página Inicial</li>
+                <li>Quem Somos<img src="" alt=""></li>
+                <li>Nossa Solução</li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="mainCad">
+        <div class="formCad">
+            <div class="headerCad">
+                <!-- <img src="assets/google-logo.png" alt=""> -->
+                <h1 class="titleAcess">Cadastrar-se</h1>
+                <p>Bem-Vindo! Digite seus dados abaixo</p>
+                <p>*Campos obrigatórios</p>
+            </div>
+            <form action="">
+                <p>
+                    <label for="nome_cad">Nome*</label><br>
+                    <input id="nome_cad" class="campo" name="nome_cad" required="required" type="text" placeholder="Nome Completo">
+                </p>
+
+                <p> 
+                    <label for="email_cad">E-mail*</label> <br>
+                    <input id="email_cad" class="campo" name="email_cad" required="required" type="email" placeholder="ex. contato@htmlecsspro.com"/>
+                </p>
+
+                <p>
+                    <label for="number_cad">Telefone*</label> <br>
+                    <input id="number_cad" class="campo" name="number_cad" required="required" type="phone" placeholder="(11) 99999-9999"/>
+                </p>
+                
+                <p> 
+                    <label for="senha_cad">Senha*</label> <br>
+                    <input id="senha_cad" class="campo" name="senha_cad" required="required" type="password" placeholder="********"/>
+                </p>
+
+                <p> 
+                    <label for="senhaCf_cad">Confirmar Senha*</label> <br>
+                    <input id="senhaCf_cad" class="campo" name="senhaCf_cad" required="required" type="password" placeholder="********"/>
+                </p>
+
+                <!-- <input type="checkbox" id="remember" name="remember" checked> -->
+                <!-- <label for="remember" class="remember">Remember for 30 days</label> -->
+
+
+                <button  class="btnSignUp-Login" onclick="cadastrar()">Cadastrar</button>
+                <br> <br>
+                <!-- <button class="btnSignUpGoogle"><img src="assets/google-logo.png" alt="">Sign in with Google</button> -->
+
+                <p class="dontHave">Já tem uma conta? <a href="login.html" style="margin-bottom: 40px;"> Entrar</a></p>
+            </form>
+        </div>
+    </main>
+    
+</body>
+</html>
+
+<script>
+    function cadastrar(){
+        var nomeVar = nome_cad.value;
+        var emailVar = email_cad.value;
+        var senhaVar = senha_cad.value;
+        var confSenhaVar = senhaCf_cad.value;
+        var telefoneVar = number_cad.value;
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                telefoneServer: telefoneVar
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if(resposta.ok){
+                alert("CADASTRADO");
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "5000")
+            }else{
+                throw("Houve um erro ao tentar realizar o cadastro!")
+            }
+        }).catch(function (resposta){
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
+</script>
