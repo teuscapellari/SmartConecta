@@ -97,10 +97,7 @@
 
             if(resposta.ok){
                 alert("CADASTRADO");
-
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "5000")
+                window.location.href = "login.html";
             }else{
                 throw("Houve um erro ao tentar realizar o cadastro!")
             }

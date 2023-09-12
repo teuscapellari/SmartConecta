@@ -15,158 +15,59 @@
 </head>
 <body>
 
-    <div class="content">
+    <div class="home">
         <div class="menu">
-            <!-- HOUSE -->
-            <div class="superior">
-                <div class="itemMenu">
-                    <img src="assets/home.png" alt="">
-                </div>
-                <!-- GRAFICO -->
-                <div class="itemMenu">
-                    <img src="assets/activity.png" alt="">
-                </div>
-                <!-- CAMADAS -->
-                <div class="itemMenu">
-                    <img src="assets/layers.png" alt="">
-                </div>
-                <!-- CHECK -->
-                <div class="itemMenu">
-                    <img src="assets/check-mark.png" alt="">
-                </div>
-                <!-- BANDEIRA -->
-                <div class="itemMenu">
-                    <img src="assets/flag.png" alt="">
-                </div>
-                <!-- PERFIS -->
-                <div class="itemMenu">
-                    <img src="assets/group.png" alt="">
-                </div>
+
+            <!-- HOME -->
+            <div class="iconHome" onclick="irHome()">
+                <img src="assets/home.png" alt="">
             </div>
 
-            <!-- LA EMBAIXO -->
+            <!-- DASHBOARD -->
+            <div class="iconDash" onclick="irDash()">
+              <img src="assets/dashboard.png" alt="">
+            </div>
 
-            <div class="inferior">
-                <!-- NAO SEI O QUE E -->
-                <div class="itemMenu">
-                    <img src="assets/gear (1).png" alt="">
-                </div>
-                <!-- CONFIGURAÇÂO -->
-                <div class="itemMenu">
-                    <img src="assets/gear.png" alt="">
-                </div>
-                <!-- LINHA DIVISORIA -->
-                <hr>
-                <!-- IMAGEM PERFIL -->
-                <div class="itemMenu">
-                    <img src="assets/user.png" alt="">
-                </div>
-            </div>
         </div>
-        <div class="dashboard">
-            <div class="headerDashboard">
-                <h1>Balancete</h1>
-                
-                <!-- <div class="buttonDash">
-                    <button class="btnImport"><img src="assets/import.png" alt="">Import</button>
-                    <button class="btnAddCostumer">+ Add Costumer</button>
-                </div> -->
+        <div class="contentHome">
+            
+
+            <div class="historicos">
+                <div class="histDesp">
+                    <h1>Visualizar Despesas</h1>
+                </div>
+                <div class="histEntr">
+                    <h1>Visualizar Entradas</h1>
+                </div>
             </div>
-            <div class="secondHeader">
-                <p onclick="registerDesp()">Registrar despesa</p>
-                <p onclick="registerEntr()">Registrar entrada</p>
-            </div>
-            <div class="grafico">
-                <canvas id="myChart"></canvas>
-            </div>              
-        </div>
-    </div>
-    
+        
 </body>
 </html>
 
 <script>
 
-    function registerDesp(){
+function openDesp() {
+  document.getElementById("myDesp").style.display = "block";
+}
 
-    }
+function closeDesp() {
+  document.getElementById("myDesp").style.display = "none";
+}
+function openEntr() {
+  document.getElementById("myEntr").style.display = "block";
+}
 
-    function registerEntr(){
-        
-    }
+function closeEntr() {
+  document.getElementById("myEntr").style.display = "none";
+}
 
-    // const labels = [
-    //   'Jan',
-    //   'Feb',
-    //   'Mar',
-    //   'Apr',
-    //   'May',
-    //   'Jun',
-    //   'Jul',
-    //   'Aug',
-    //   'Sep',
-    //   'Oct',
-    //   'Nov',
-    //   'Dec',
-    // ];
-  
-    // const data = {
-    //   labels: labels,
-    //   datasets: [{
-    //     label: 'Receitas',
-    //     backgroundColor: 'rgb(255, 99, 132)',
-    //     borderColor: 'rgb(255, 99, 132)',
-    //     data: [300000.00, 200000.00, 150000.00, 170000.00, 120000.00, 264000.00, 75000.00, 100000.00],
-    //   }],
-    //     label: 'Despesas',
-    //     data: [15, 14, 16, 19, 17, 16, 18, 19, 19, 20, 21, 22],
-    // };
-  
-    // const config = {
-    //   type: 'bar',
-    //   data: data,
-    //   options: {}
-    // };
+function irDash(){
+  window.location.href = "dashboard.html";
+}
 
-    const pontos = [
-    'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ]
+function irHome(){
+  window.location.href = "home.html";
+}
 
-    const dadosGeral = {
-        labels:pontos,
-        datasets: [{
-                label: "Receitas",
-                data: [300000.00, 200000.00, 150000.00, 170000.00, 120000.00, 264000.00, 75000.00, 100000.00]
-            },
-            {
-                label: "Despesas",
-                data: [30000.00, 20000.00, 15000.00, 17000.00, 12000.00, 26400.00, 7500.00, 10000.00]
-            }]
-    }
-    const configGraficoGeral = {
-        type: "line",
-        data: dadosGeral,
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-            }
-        }
-    }
-
-    const graficoGeral = new Chart(
-        document.getElementById("myChart"),
-        configGraficoGeral
-    );
   </script>
     

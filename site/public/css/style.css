@@ -353,15 +353,17 @@ main{
     width: 100%;
 }
 
-.iconHome{
+.iconHome, .iconDash{
     width: 50%;
     display: flex;
     justify-content: center;
+    padding: 10px;
 }
 
-.iconHome:hover{
+.iconHome:hover, .iconDash:hover{
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .contentHome{
@@ -410,7 +412,82 @@ main{
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
 
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #d19494;
+    z-index: 9;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+}
+
+.form-popup h1{
+    font-size: 20px;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.form-container input[type=text], .form-container input[type=password] {
+    width: 90%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.form-container textarea{
+    width: 100%;
+}
+
+.form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    /* opacity: 0.8; */
+    /* font-weight: bold; */
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-container .cancel {
+    background-color: red;
+}
+
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
 
 /* FIM DO HOME */
 
