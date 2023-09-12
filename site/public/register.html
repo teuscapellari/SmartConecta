@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar-se</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="./js/funcoes.js"></script>
 </head>
 <body>
 
     <header>
         <div class="header login">
-            <img src="assets/" alt="">
+            <!-- <img src="assets/" alt=""> -->
             <a href="index.html"><h2>SmartConecta</h2></a>
 
             <ul>
@@ -96,8 +95,12 @@
             console.log("resposta: ", resposta);
 
             if(resposta.ok){
-                alert("CADASTRADO");
-                window.location.href = "login.html";
+
+                setTimeout(() => {
+                    alert("Cadastrado com sucesso!");
+                    window.location.href = "login.html";
+                },2000)
+                
             }else{
                 throw("Houve um erro ao tentar realizar o cadastro!")
             }

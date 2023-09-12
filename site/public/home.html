@@ -54,20 +54,20 @@
         <h1>Registrar Despesa</h1>
 
         <label for="title">Nome: </label>
-        <input type="text" placeholder="Nome Despesa" name="text" required>
+        <input id="ipt_nomeDesp" type="text" placeholder="Nome Despesa" name="text" required>
 
         <label for="psw">Data: </label>
-        <input type="date" placeholder="00/00/0000" name="date" required>
+        <input id="ipt_dataDesp" type="date" placeholder="00/00/0000" name="date" required>
         <p></p>
-        <label for="appt">Horário Despesa: </label>
 
-      <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+        <label for="appt">Horário Despesa: </label>
+        <input type="time" id="ipt_horaDesp" name="appt" min="09:00" max="18:00" required />
       <p></p>
 
         <label for="psw">Descrição: </label>
-        <textarea id="desc" name="descr" rows="4" cols="50"></textarea>
+        <textarea id="ipt_descDesp" name="descr" rows="4" cols="50"></textarea>
 
-        <button type="submit" class="btn">REGISTRAR</button>
+        <button type="submit" class="btn" onclick="regDesp()">REGISTRAR</button>
         <button type="button" class="btn cancel" onclick="closeDesp()">Sair</button>
     </form>
             </div>
@@ -119,6 +119,42 @@ function closeEntr() {
 
 function irDash(){
   window.location.href = "dashboard.html";
+}
+
+function regDesp(){
+  var nomeVar = ipt_nomeDesp.value;
+        var dataVar = ipt_dataDesp.value;
+        var horaVar = ipt_horaDesp.value;
+        var descVar = ipt_descDesp.value;
+        var fkUserVar = sessionStorage.ID_USUARIO;
+
+        fetch("/despesa/registrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                dataServer: dataVar,
+                horaServer: horaVar,
+                descServer: descVar,
+                fkUserServer: fkUserVar
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if(resposta.ok){
+
+                alert("Despesa registrada!")
+                
+            }else{
+                throw("Houve um erro ao tentar realizar o registro da despesa!")
+            }
+        }).catch(function (resposta){
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
 }
 
   </script>
