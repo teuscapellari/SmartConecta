@@ -110,6 +110,16 @@
 
 <script>
 
+if(sessionStorage.ID_USUARIO == 0){
+  window.location.href = "index.html"
+}
+
+
+// setInterval(() =>{
+  selectDesp();
+  selectEntr();
+// }, 5000);
+
 function openDesp() {
   document.getElementById("myDesp").style.display = "block";
   closeEntr();
@@ -206,6 +216,65 @@ function regEntr(){
         });
 
         return false;
+}
+
+var fkUser = sessionStorage.ID_USUARIO;
+
+function selectDesp(fkUser){
+  fetch(`/despesa/selectDesp/${fkUser}`,
+         {
+            cache: "no-store",
+         }
+        ).then(function (resposta){
+            
+      if(resposta.ok){
+        if(resposta.status == 204){
+          // var feed = document.getElementById("resultadosQuiz");
+          // resultadosQuiz.style.display = 'flex';
+          // resultadosQuiz.style.color = '#FFFFFF';
+          // var mensagem = document.createElement("p");
+          // mensagem.innerHTML = "Você ainda não realizou nenhuma tentativa :)" //SE NÂO APARECER NADA, MUDAR AQUI
+          // feed.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+        }
+
+        resposta.json().then(function (resposta){
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+          //  var feed = document.getElementById("resultadosQuiz");
+          //  var main = document.getElementById("idMainQuiz");
+          // feed.innerHTML = "";
+          // for(let i = 0; i < resposta.length; i++){
+          //   var publicacao = resposta[i];
+
+          //   var divResultado = document.createElement("div");
+          //   var qtdAcertosElement = document.createElement("p");
+          //   var fkUsuarioElement = document.createElement("p");
+          //   var dataRespElement = document.createElement("p");
+
+          //   qtdAcertosElement.innerHTML = `Quantidade de acertos: ${publicacao.qtdAcertos}`;
+          //   fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+          //   dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+          //   divResultado.className = "resultadosQuiz";
+
+          //   main.appendChild(divResultado);
+          //   divResultado.appendChild(qtdAcertosElement);
+          //   divResultado.appendChild(fkUsuarioElement);
+          //   divResultado.appendChild(dataRespElement);
+          // }
+        });
+      }else{
+        throw ("Houve um erro na API")
+      }
+    }).catch(function (resposta){
+      console.error(resposta);
+    });
+}
+
+
+function selectEntr(fkUser){
+
 }
 
   </script>

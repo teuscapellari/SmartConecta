@@ -8,6 +8,10 @@ router.post("/registrar", function (req, res) {
     despesaController.registrar(req, res);
 });
 
+router.get("/selectDesp/:fkUser", function (req, res){
+    despesaController.selectDesp(req, res);
+});
+
 // router.post("/autenticar", function (req, res) {
 //     usuarioController.autenticar(req, res);
 // });
