@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <!-- <script
       src="https://kit.fontawesome.com/89d28f01ec.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
 
 </head>
 <body>
@@ -50,7 +50,7 @@
 
 
     <div class="form-popup" id="myDesp">
-    <form action="/action_page.php" class="form-container">
+    <form class="form-container">
         <h1>Registrar Despesa</h1>
 
         <label for="title">Nome: </label>
@@ -61,8 +61,12 @@
         <p></p>
 
         <label for="appt">Horário Despesa: </label>
-        <input type="time" id="ipt_horaDesp" name="appt" min="09:00" max="18:00" required />
+        <input type="time" id="ipt_horaDesp" name="appt" required />
       <p></p>
+
+      <label for="psw">Valor: </label>
+        <input id="ipt_valorDesp" type="number" placeholder="1000,00" step="0.010" name="valor" required>
+        <p></p>
 
         <label for="psw">Descrição: </label>
         <textarea id="ipt_descDesp" name="descr" rows="4" cols="50"></textarea>
@@ -74,24 +78,28 @@
         </div>
 
         <div class="form-popup" id="myEntr">
-          <form action="/action_page.php" class="form-container">
+          <form class="form-container">
               <h1>Registrar Entrada</h1>
       
               <label for="title">Nome: </label>
-              <input type="text" placeholder="Nome Entrada" name="text" required>
+              <input type="text" id="ipt_nomeEntr" placeholder="Nome Entrada" name="text" required>
       
               <label for="psw">Data: </label>
-              <input type="date" placeholder="00/00/0000" name="date" required>
+              <input type="date" id="ipt_dataEntr" placeholder="00/00/0000" name="date" required>
               <p></p>
+
               <label for="appt">Horário Entrada: </label>
-      
-            <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+            <input type="time" id="ipt_horaEntr" name="appt" required />
             <p></p>
+
+            <label for="psw">Valor: </label>
+        <input id="ipt_valorEntr" type="number" placeholder="1000,00" step="0.010" name="valor" required>
+        <p></p>
       
               <label for="psw">Descrição: </label>
-              <textarea id="desc" name="descr" rows="4" cols="50"></textarea>
+              <textarea id="ipt_descEntr" name="descr" rows="4" cols="50"></textarea>
       
-              <button type="submit" class="btn">REGISTRAR</button>
+              <button type="submit" class="btn" onclick="regEntr()">REGISTRAR</button>
               <button type="button" class="btn cancel" onclick="closeEntr()">Sair</button>
           </form>
                   </div>
@@ -104,6 +112,7 @@
 
 function openDesp() {
   document.getElementById("myDesp").style.display = "block";
+  closeEntr();
 }
 
 function closeDesp() {
@@ -111,6 +120,7 @@ function closeDesp() {
 }
 function openEntr() {
   document.getElementById("myEntr").style.display = "block";
+  closeDesp();
 }
 
 function closeEntr() {
@@ -125,6 +135,7 @@ function regDesp(){
   var nomeVar = ipt_nomeDesp.value;
         var dataVar = ipt_dataDesp.value;
         var horaVar = ipt_horaDesp.value;
+        var valorVar = ipt_valorDesp.value;
         var descVar = ipt_descDesp.value;
         var fkUserVar = sessionStorage.ID_USUARIO;
 
@@ -137,6 +148,7 @@ function regDesp(){
                 nomeServer: nomeVar,
                 dataServer: dataVar,
                 horaServer: horaVar,
+                valorServer: valorVar,
                 descServer: descVar,
                 fkUserServer: fkUserVar
             })
@@ -146,9 +158,48 @@ function regDesp(){
             if(resposta.ok){
 
                 alert("Despesa registrada!")
+                openDesp();
                 
             }else{
                 throw("Houve um erro ao tentar realizar o registro da despesa!")
+            }
+        }).catch(function (resposta){
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+}
+
+function regEntr(){
+  var nomeVar = ipt_nomeEntr.value;
+        var dataVar = ipt_dataEntr.value;
+        var horaVar = ipt_horaEntr.value;
+        var valorVar = ipt_valorEntr.value;
+        var descVar = ipt_descEntr.value;
+        var fkUserVar = sessionStorage.ID_USUARIO;
+
+        fetch("/entrada/registrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                dataServer: dataVar,
+                horaServer: horaVar,
+                valorServer: valorVar,
+                descServer: descVar,
+                fkUserServer: fkUserVar
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if(resposta.ok){
+
+                alert("Entrada registrada!");
+                
+            }else{
+                throw("Houve um erro ao tentar realizar o registro da entrada!")
             }
         }).catch(function (resposta){
             console.log(`#ERRO: ${resposta}`);

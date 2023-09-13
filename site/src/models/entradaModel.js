@@ -16,7 +16,7 @@ function registrar(nome, data, hora, valor, desc, user) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO Despesa (nomeDesp, dataDesp, horaDesp, valorDesp, descDesp, fkUser) VALUES ('${nome}', '${data}', '${hora}', '${valor}', '${desc}', '${user}');
+        INSERT INTO Entrada (nomeEntr, dataEntr, horaEntr, valorEntr, descEntr, fkUser) VALUES ('${nome}', '${data}', '${hora}', '${valor}', '${desc}', '${user}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

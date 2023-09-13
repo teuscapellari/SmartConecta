@@ -1,4 +1,4 @@
-var despesaModel = require("../models/despesaModel");
+var entradaModel = require("../models/entradaModel");
 
 // function autenticar(req, res) {
 //     var email = req.body.emailServer;
@@ -55,8 +55,8 @@ function registrar(req, res) {
         res.status(400).send("Sua hora está undefined!");
     } else {
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        despesaModel.registrar(nome, data, hora, valor, desc, user)
+        // Passe os valores como parâmetro e vá para o arquivo entradaModel.js 
+        entradaModel.registrar(nome, data, hora, valor, desc, user)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -65,7 +65,7 @@ function registrar(req, res) {
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao realizar o registro de despesa! Erro: ",
+                        "\nHouve um erro ao realizar o registro de entrada! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);
