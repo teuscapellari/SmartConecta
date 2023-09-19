@@ -488,6 +488,23 @@ main{
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
 }
+/* 
+table{
+    width: 100%;
+} */
+/* 
+td{
+    width: 20%;
+} */
+
+table, th, td{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+th, td{
+    padding: 10px;
+}
 
 /* FIM DO HOME */
 

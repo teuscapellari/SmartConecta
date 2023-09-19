@@ -75,8 +75,8 @@ function registrar(req, res) {
 }
 
 function selectDesp(req, res) {
-    var fkUser = req.params.fkUser;
-    despesaModel.selectDesp(fkUser)
+    var fkUsuario = req.params.fkUser;
+    despesaModel.selectDesp(fkUsuario)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);

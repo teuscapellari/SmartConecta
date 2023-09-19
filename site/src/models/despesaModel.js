@@ -22,8 +22,8 @@ function registrar(nome, data, hora, valor, desc, user) {
     return database.executar(instrucao);
 } 
 
-function selectDesp(fkUser) {
-    console.log("ACESSEI O DESPESA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function selectDesp()", fkUser);
+function selectDesp(fkUsuario) {
+    console.log("ACESSEI O DESPESA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function selectDesp()", fkUsuario);
     var instrucao = `
     SELECT nomeDesp,
     dataDesp, 
@@ -31,7 +31,7 @@ function selectDesp(fkUser) {
     valorDesp,
     descDesp
     FROM Despesa
-     WHERE fkUser = '${fkUser}';
+     WHERE fkUser = '${fkUsuario}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

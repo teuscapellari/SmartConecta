@@ -42,6 +42,18 @@
             <div class="historicos">
                 <div class="histDesp">
                     <h1>Histórico de Despesas</h1>
+                    <div class="tabelaDesp" id="tabelaDesp">
+                      <table id="tableDesp" class="tableDesp">
+                        <tr>
+                          <th>Nome</th>
+                          <th>Data</th>
+                          <th>Hora</th>
+                          <th>Valor</th>
+                          <th>Descrição</th>
+                        </tr>
+                          
+                      </table>
+                    </div>
                 </div>
                 <div class="histEntr">
                     <h1>Histórico de Entradas</h1>
@@ -114,10 +126,12 @@ if(sessionStorage.ID_USUARIO == 0){
   window.location.href = "index.html"
 }
 
+var fkUser = sessionStorage.ID_USUARIO;
+
 
 // setInterval(() =>{
-  selectDesp();
-  selectEntr();
+  selectDesp(fkUser);
+  selectEntr(fkUser);
 // }, 5000);
 
 function openDesp() {
@@ -169,6 +183,7 @@ function regDesp(){
 
                 alert("Despesa registrada!")
                 openDesp();
+                selectDesp(fkUser);
                 
             }else{
                 throw("Houve um erro ao tentar realizar o registro da despesa!")
@@ -207,6 +222,7 @@ function regEntr(){
             if(resposta.ok){
 
                 alert("Entrada registrada!");
+                selectEntr(fkUser);
                 
             }else{
                 throw("Houve um erro ao tentar realizar o registro da entrada!")
@@ -218,10 +234,74 @@ function regEntr(){
         return false;
 }
 
-var fkUser = sessionStorage.ID_USUARIO;
+
 
 function selectDesp(fkUser){
   fetch(`/despesa/selectDesp/${fkUser}`,
+         {
+            cache: "no-store",
+         }
+        ).then(function (resposta){
+            
+      if(resposta.ok){
+        if(resposta.status == 204){
+          var feed = document.getElementById("tableDesp");
+          // resultadosQuiz.style.display = 'flex';
+          // resultadosQuiz.style.color = '#FFFFFF';
+          var mensagem = document.createElement("td");
+          mensagem.innerHTML = "Você ainda não possui despesas :)" //SE NÂO APARECER NADA, MUDAR AQUI
+          feed.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+        }
+
+        resposta.json().then(function (resposta){
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+           var feed = document.getElementById("tableDesp");
+           var main = document.getElementById("tabelaDesp");
+          for(let i = 0; i < resposta.length; i++){
+            var publicacao = resposta[i];
+
+            var linhaResultado = document.createElement("tr");
+            var nome = document.createElement("td");
+            var data = document.createElement("td");
+            var hora = document.createElement("td");
+            var valor = document.createElement("td");
+            var descricao = document.createElement("td");
+            // var fkUsuarioElement = document.createElement("p");
+            // var dataRespElement = document.createElement("p");
+
+            nome.innerHTML = `${publicacao.nomeDesp}`;
+            data.innerHTML = `${publicacao.dataDesp}`;
+            hora.innerHTML = `${publicacao.horaDesp}`;
+            valor.innerHTML = `R$${publicacao.valorDesp}`;
+            descricao.innerHTML = `${publicacao.descDesp}`;
+            // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+            // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+            // divResultado.className = "resultadosQuiz";
+
+            main.appendChild(linhaResultado);
+            linhaResultado.appendChild(nome);
+            linhaResultado.appendChild(data);
+            linhaResultado.appendChild(hora);
+            linhaResultado.appendChild(valor);
+            linhaResultado.appendChild(descricao);
+            // divResultado.appendChild(fkUsuarioElement);
+            // divResultado.appendChild(dataRespElement);
+          }
+        });
+      }else{
+        throw ("Houve um erro na API")
+      }
+    }).catch(function (resposta){
+      console.error(resposta);
+    });
+}
+
+
+function selectEntr(fkUser){
+  fetch(`/entrada/selectEntr/${fkUser}`,
          {
             cache: "no-store",
          }
@@ -270,11 +350,6 @@ function selectDesp(fkUser){
     }).catch(function (resposta){
       console.error(resposta);
     });
-}
-
-
-function selectEntr(fkUser){
-
 }
 
   </script>
