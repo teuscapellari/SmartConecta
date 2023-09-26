@@ -15,6 +15,8 @@ O SmartConecta é um sistema para gerenciamento financeiro de condomínio. Onde 
 ![Github Badge](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 ![Github Badge](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
+![Status](https://img.shields.io/badge/Status_do_projeto-Em_Andamento-yellow)
+
 <hr>
 
 Copyright ©️ 2023 - Bruno Freitas, Eliel Roberto, Mateus Capellari, Rodrigo da Silva e Vinicius Kenzo.
