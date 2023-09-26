@@ -4,4 +4,4 @@ O SmartConecta é um projeto universitário, desenvilvido em 5 semestres com o i
 
 
 
-Copyright ©️ 2023 - Eliel Roberto, Mateus Capellari e Vinicius Kenzo.
+Copyright ©️ 2023 - Bruno Freitas, Eliel Roberto, Mateus Capellari, Rodrido da Silva e Vinicius Kenzo.
