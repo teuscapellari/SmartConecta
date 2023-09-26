@@ -353,14 +353,18 @@ main{
     width: 100%;
 }
 
-.iconHome, .iconDash{
+.menu hr{
+    width: 80%;
+}
+
+.iconHome, .iconDash, .iconPerfil, .iconLogout{
     width: 50%;
     display: flex;
     justify-content: center;
     padding: 10px;
 }
 
-.iconHome:hover, .iconDash:hover{
+.iconHome:hover, .iconDash:hover, .iconPerfil:hover, .iconLogout:hover{
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     cursor: pointer;
@@ -396,13 +400,19 @@ main{
     cursor: pointer;
 }
 
-.historicos{
+.historicos, .infoUser{
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
 
-.histDesp, .histEntr{
+.infoUser{
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+.histDesp, .histEntr, .camposUser{
     padding: 20px;
     margin-top: 20px;
     width: 45%;
@@ -410,6 +420,35 @@ main{
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.camposUser{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formUser input{
+    width: 50%;
+    border-radius: 5px;
+    border-style: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    height: 20px;
+    padding: 5px;
+}
+
+.btnAltInfo{
+    background-color: blue;
+    width: 50%;
+    height: 30px;
+    margin-top: 10px;
+    color: white;
+    border-radius: 5px;
+    border: 1px rgb(212, 210, 210) solid;
+}
+
+.btnAltInfo:hover{
+    cursor: pointer;
 }
 
 .open-button {
@@ -502,7 +541,12 @@ table, th, td{
     border: 1px solid black;
 }
 
+tr{
+    width: 90px;
+}
+
 th, td{
+    min-width: 75px;
     padding: 10px;
 }
 

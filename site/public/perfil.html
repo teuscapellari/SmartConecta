@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <!-- <script
+      src="https://kit.fontawesome.com/89d28f01ec.js"
+      crossorigin="anonymous"
+    ></script> -->
+
+</head>
+
+<body>
+
+    <div class="home">
+        <div class="menu">
+
+            <!-- HOME -->
+            <div class="iconHome">
+                <img src="assets/home.png" alt="">
+            </div>
+
+            <!-- DASHBOARD -->
+            <div class="iconDash" onclick="irDash()">
+                <img src="assets/dashboard.png" alt="">
+            </div>
+
+            <hr>
+
+            <!-- PERFIL -->
+            <div class="iconPerfil" onclick="irPerf()">
+                <img src="assets/user.png" alt="">
+            </div>
+
+            <!-- LOGOUT -->
+            <div class="iconLogout" onclick="logout()">
+                <img src="assets/import.png" alt=""> <!-- TROCAR DEPPOOOOOOOOIIIIISSSSSSS -->
+            </div>
+
+        </div>
+        <div class="contentHome">
+            <div class="infoUser">
+                <div class="formUser">
+
+                    <div class="camposUser">
+
+                        <h1>Suas informações</h1>
+
+                        <label for="Nome">Nome:</label>
+                        <input type="text" name="" id="ipt_nome">
+
+                        <label for="Email">E-mail:</label>
+                        <input type="email" name="" id="ipt_email">
+
+                        <label for="Telefone">Telefone: </label>
+                        <input type="tel" name="" id="ipt_telefone">
+
+                        <button onclick="alterarInfo()" class="btnAltInfo">Alterar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+    if (sessionStorage.ID_USUARIO == 0) {
+        window.location.href = "index.html"
+    }
+
+    function logout() {
+        sessionStorage.ID_USUARIO = 0;
+        sessionStorage.EMAIL_USUARIO = "";
+        sessionStorage.NOME_USUARIO = "";
+        window.location.href = "login.html";
+    }
+
+    function irPerf() {
+        window.location.href = "perfil.html";
+    }
+
+
+
+    function irDash() {
+        window.location.href = "dashboard.html";
+    }
+
+    var fkUser = sessionStorage.ID_USUARIO;
+    selectInfo(fkUser);
+
+    function selectInfo(fkUser) {
+
+        fetch("/usuarios/selectInfo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkUserServer: fkUser
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    ipt_email.value = json.email;
+                    ipt_nome.value = json.nome;
+                    ipt_telefone.value = json.telefone;
+
+                    // alert("Logado com sucesso");
+
+                    // window.location.href = "home.html";
+
+                });
+            } else {
+                console.log("Houve um erro ao tentar realizar o login");
+
+                resposta.text().then(texto => {
+                    console.erro(texto);
+                });
+            }
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+        return false;
+    }
+
+    function alterarInfo(){
+        var nomeVar = ipt_nome.value;
+        var emailVar = ipt_email.value;
+        var telefoneVar = ipt_telefone.value;
+
+        fetch("/usuarios/alterarInfo", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                telefoneServer: telefoneVar,
+                fkUserServer: fkUser
+            })
+        }).then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if(resposta.ok){
+
+                // setTimeout(() => {
+                //     alert("Cadastrado com sucesso!");
+                //     window.location.href = "login.html";
+                // },2000)
+                
+            }else{
+                throw("Houve um erro ao tentar realizar o cadastro!")
+            }
+        }).catch(function (resposta){
+            console.log(`#ERRO: ${resposta}`);
+        });
+
+        return false;
+    }
+
+
+</script>

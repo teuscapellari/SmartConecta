@@ -1,250 +1,276 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-    <!-- <script
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+  <!-- <script
       src="https://kit.fontawesome.com/89d28f01ec.js"
       crossorigin="anonymous"
     ></script> -->
 
 </head>
+
 <body>
 
-    <div class="home">
-        <div class="menu">
+  <div class="home">
+    <div class="menu">
 
-            <!-- HOME -->
-            <div class="iconHome">
-                <img src="assets/home.png" alt="">
-            </div>
+      <!-- HOME -->
+      <div class="iconHome">
+        <img src="assets/home.png" alt="">
+      </div>
 
-            <!-- DASHBOARD -->
-            <div class="iconDash" onclick="irDash()">
-              <img src="assets/dashboard.png" alt="">
-            </div>
+      <!-- DASHBOARD -->
+      <div class="iconDash" onclick="irDash()">
+        <img src="assets/dashboard.png" alt="">
+      </div>
 
+      <hr>
+
+      <!-- PERFIL -->
+      <div class="iconPerfil" onclick="irPerf()">
+        <img src="assets/user.png" alt="">
+      </div>
+
+      <!-- LOGOUT -->
+      <div class="iconLogout" onclick="logout()">
+        <img src="assets/import.png" alt=""> <!-- TROCAR DEPPOOOOOOOOIIIIISSSSSSS -->
+      </div>
+
+    </div>
+    <div class="contentHome">
+      <div class="registros">
+        <div class="regDesp">
+          <p onclick="openDesp()">Registrar Despesa</p>
         </div>
-        <div class="contentHome">
-            <div class="registros">
-                <div class="regDesp">
-                    <p onclick="openDesp()">Registrar Despesa</p>
-                </div>
-                <div class="regEntr">
-                  <p onclick="openEntr()">Registrar Entrada</p>
-                </div>
-            </div>
+        <div class="regEntr">
+          <p onclick="openEntr()">Registrar Entrada</p>
+        </div>
+      </div>
 
-            <div class="historicos">
-                <div class="histDesp">
-                    <h1>Histórico de Despesas</h1>
-                    <div class="tabelaDesp" id="tabelaDesp">
-                      <table id="tableDesp" class="tableDesp">
-                        <tr>
-                          <th>Nome</th>
-                          <th>Data</th>
-                          <th>Hora</th>
-                          <th>Valor</th>
-                          <th>Descrição</th>
-                        </tr>
-                          
-                      </table>
-                    </div>
-                </div>
-                <div class="histEntr">
-                    <h1>Histórico de Entradas</h1>
-                </div>
-            </div>
+      <div class="historicos">
+        <div class="histDesp">
+          <h1>Histórico de Despesas</h1>
+          <div class="tabelaDesp" id="tabelaDesp">
+            <table id="tableDesp" class="tableDesp">
+              <tr>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Valor</th>
+                <th>Descrição</th>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+        <div class="histEntr">
+          <h1>Histórico de Entradas</h1>
+        </div>
+      </div>
 
 
-    <div class="form-popup" id="myDesp">
-    <form class="form-container">
-        <h1>Registrar Despesa</h1>
+      <div class="form-popup" id="myDesp">
+        <form class="form-container">
+          <h1>Registrar Despesa</h1>
+
+          <label for="title">Nome: </label>
+          <input id="ipt_nomeDesp" type="text" placeholder="Nome Despesa" name="text" required>
+
+          <label for="psw">Data: </label>
+          <input id="ipt_dataDesp" type="date" placeholder="00/00/0000" name="date" required>
+          <p></p>
+
+          <label for="appt">Horário Despesa: </label>
+          <input type="time" id="ipt_horaDesp" name="appt" required />
+          <p></p>
+
+          <label for="psw">Valor: </label>
+          <input id="ipt_valorDesp" type="number" placeholder="1000,00" step="0.010" name="valor" required>
+          <p></p>
+
+          <label for="psw">Descrição: </label>
+          <textarea id="ipt_descDesp" name="descr" rows="4" cols="50"></textarea>
+
+          <button type="submit" class="btn" onclick="regDesp()">REGISTRAR</button>
+          <button type="button" class="btn cancel" onclick="closeDesp()">Sair</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="form-popup" id="myEntr">
+      <form class="form-container">
+        <h1>Registrar Entrada</h1>
 
         <label for="title">Nome: </label>
-        <input id="ipt_nomeDesp" type="text" placeholder="Nome Despesa" name="text" required>
+        <input type="text" id="ipt_nomeEntr" placeholder="Nome Entrada" name="text" required>
 
         <label for="psw">Data: </label>
-        <input id="ipt_dataDesp" type="date" placeholder="00/00/0000" name="date" required>
+        <input type="date" id="ipt_dataEntr" placeholder="00/00/0000" name="date" required>
         <p></p>
 
-        <label for="appt">Horário Despesa: </label>
-        <input type="time" id="ipt_horaDesp" name="appt" required />
-      <p></p>
+        <label for="appt">Horário Entrada: </label>
+        <input type="time" id="ipt_horaEntr" name="appt" required />
+        <p></p>
 
-      <label for="psw">Valor: </label>
-        <input id="ipt_valorDesp" type="number" placeholder="1000,00" step="0.010" name="valor" required>
+        <label for="psw">Valor: </label>
+        <input id="ipt_valorEntr" type="number" placeholder="1000,00" step="0.010" name="valor" required>
         <p></p>
 
         <label for="psw">Descrição: </label>
-        <textarea id="ipt_descDesp" name="descr" rows="4" cols="50"></textarea>
+        <textarea id="ipt_descEntr" name="descr" rows="4" cols="50"></textarea>
 
-        <button type="submit" class="btn" onclick="regDesp()">REGISTRAR</button>
-        <button type="button" class="btn cancel" onclick="closeDesp()">Sair</button>
-    </form>
-            </div>
-        </div>
+        <button type="submit" class="btn" onclick="regEntr()">REGISTRAR</button>
+        <button type="button" class="btn cancel" onclick="closeEntr()">Sair</button>
+      </form>
+    </div>
+  </div>
 
-        <div class="form-popup" id="myEntr">
-          <form class="form-container">
-              <h1>Registrar Entrada</h1>
-      
-              <label for="title">Nome: </label>
-              <input type="text" id="ipt_nomeEntr" placeholder="Nome Entrada" name="text" required>
-      
-              <label for="psw">Data: </label>
-              <input type="date" id="ipt_dataEntr" placeholder="00/00/0000" name="date" required>
-              <p></p>
-
-              <label for="appt">Horário Entrada: </label>
-            <input type="time" id="ipt_horaEntr" name="appt" required />
-            <p></p>
-
-            <label for="psw">Valor: </label>
-        <input id="ipt_valorEntr" type="number" placeholder="1000,00" step="0.010" name="valor" required>
-        <p></p>
-      
-              <label for="psw">Descrição: </label>
-              <textarea id="ipt_descEntr" name="descr" rows="4" cols="50"></textarea>
-      
-              <button type="submit" class="btn" onclick="regEntr()">REGISTRAR</button>
-              <button type="button" class="btn cancel" onclick="closeEntr()">Sair</button>
-          </form>
-                  </div>
-              </div>
-        
 </body>
+
 </html>
 
 <script>
 
-if(sessionStorage.ID_USUARIO == 0){
-  window.location.href = "index.html"
-}
+  if (sessionStorage.ID_USUARIO == 0) {
+    window.location.href = "index.html"
+  }
 
-var fkUser = sessionStorage.ID_USUARIO;
+  function logout() {
+    sessionStorage.ID_USUARIO = 0;
+    sessionStorage.EMAIL_USUARIO = "";
+    sessionStorage.NOME_USUARIO = "";
+    window.location.href = "login.html";
+  }
+
+  function irPerf() {
+    window.location.href = "perfil.html";
+  }
+
+  var fkUser = sessionStorage.ID_USUARIO;
 
 
-// setInterval(() =>{
+  // setInterval(() =>{
   selectDesp(fkUser);
   selectEntr(fkUser);
-// }, 5000);
+  // }, 5000);
 
-function openDesp() {
-  document.getElementById("myDesp").style.display = "block";
-  closeEntr();
-}
+  function openDesp() {
+    document.getElementById("myDesp").style.display = "block";
+    closeEntr();
+  }
 
-function closeDesp() {
-  document.getElementById("myDesp").style.display = "none";
-}
-function openEntr() {
-  document.getElementById("myEntr").style.display = "block";
-  closeDesp();
-}
+  function closeDesp() {
+    document.getElementById("myDesp").style.display = "none";
+  }
+  function openEntr() {
+    document.getElementById("myEntr").style.display = "block";
+    closeDesp();
+  }
 
-function closeEntr() {
-  document.getElementById("myEntr").style.display = "none";
-}
+  function closeEntr() {
+    document.getElementById("myEntr").style.display = "none";
+  }
 
-function irDash(){
-  window.location.href = "dashboard.html";
-}
+  function irDash() {
+    window.location.href = "dashboard.html";
+  }
 
-function regDesp(){
-  var nomeVar = ipt_nomeDesp.value;
-        var dataVar = ipt_dataDesp.value;
-        var horaVar = ipt_horaDesp.value;
-        var valorVar = ipt_valorDesp.value;
-        var descVar = ipt_descDesp.value;
-        var fkUserVar = sessionStorage.ID_USUARIO;
+  function regDesp() {
+    var nomeVar = ipt_nomeDesp.value;
+    var dataVar = ipt_dataDesp.value;
+    var horaVar = ipt_horaDesp.value;
+    var valorVar = ipt_valorDesp.value;
+    var descVar = ipt_descDesp.value;
+    var fkUserVar = sessionStorage.ID_USUARIO;
 
-        fetch("/despesa/registrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nomeServer: nomeVar,
-                dataServer: dataVar,
-                horaServer: horaVar,
-                valorServer: valorVar,
-                descServer: descVar,
-                fkUserServer: fkUserVar
-            })
-        }).then(function (resposta) {
-            console.log("resposta: ", resposta);
+    fetch("/despesa/registrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        dataServer: dataVar,
+        horaServer: horaVar,
+        valorServer: valorVar,
+        descServer: descVar,
+        fkUserServer: fkUserVar
+      })
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
 
-            if(resposta.ok){
+      if (resposta.ok) {
 
-                alert("Despesa registrada!")
-                openDesp();
-                selectDesp(fkUser);
-                
-            }else{
-                throw("Houve um erro ao tentar realizar o registro da despesa!")
-            }
-        }).catch(function (resposta){
-            console.log(`#ERRO: ${resposta}`);
-        });
+        alert("Despesa registrada!")
+        openDesp();
+        selectDesp(fkUser);
 
-        return false;
-}
+      } else {
+        throw ("Houve um erro ao tentar realizar o registro da despesa!")
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
 
-function regEntr(){
-  var nomeVar = ipt_nomeEntr.value;
-        var dataVar = ipt_dataEntr.value;
-        var horaVar = ipt_horaEntr.value;
-        var valorVar = ipt_valorEntr.value;
-        var descVar = ipt_descEntr.value;
-        var fkUserVar = sessionStorage.ID_USUARIO;
+    return false;
+  }
 
-        fetch("/entrada/registrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                nomeServer: nomeVar,
-                dataServer: dataVar,
-                horaServer: horaVar,
-                valorServer: valorVar,
-                descServer: descVar,
-                fkUserServer: fkUserVar
-            })
-        }).then(function (resposta) {
-            console.log("resposta: ", resposta);
+  function regEntr() {
+    var nomeVar = ipt_nomeEntr.value;
+    var dataVar = ipt_dataEntr.value;
+    var horaVar = ipt_horaEntr.value;
+    var valorVar = ipt_valorEntr.value;
+    var descVar = ipt_descEntr.value;
+    var fkUserVar = sessionStorage.ID_USUARIO;
 
-            if(resposta.ok){
+    fetch("/entrada/registrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        dataServer: dataVar,
+        horaServer: horaVar,
+        valorServer: valorVar,
+        descServer: descVar,
+        fkUserServer: fkUserVar
+      })
+    }).then(function (resposta) {
+      console.log("resposta: ", resposta);
 
-                alert("Entrada registrada!");
-                selectEntr(fkUser);
-                
-            }else{
-                throw("Houve um erro ao tentar realizar o registro da entrada!")
-            }
-        }).catch(function (resposta){
-            console.log(`#ERRO: ${resposta}`);
-        });
+      if (resposta.ok) {
 
-        return false;
-}
+        alert("Entrada registrada!");
+        window.location.reload();
+
+      } else {
+        throw ("Houve um erro ao tentar realizar o registro da entrada!")
+      }
+    }).catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+  }
 
 
 
-function selectDesp(fkUser){
-  fetch(`/despesa/selectDesp/${fkUser}`,
-         {
-            cache: "no-store",
-         }
-        ).then(function (resposta){
-            
-      if(resposta.ok){
-        if(resposta.status == 204){
+  function selectDesp(fkUser) {
+    fetch(`/despesa/selectDesp/${fkUser}`,
+      {
+        cache: "no-store",
+      }
+    ).then(function (resposta) {
+
+      if (resposta.ok) {
+        if (resposta.status == 204) {
           var feed = document.getElementById("tableDesp");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
@@ -254,12 +280,12 @@ function selectDesp(fkUser){
           throw "Nenhum resultado encontrado!!";
         }
 
-        resposta.json().then(function (resposta){
+        resposta.json().then(function (resposta) {
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-           var feed = document.getElementById("tableDesp");
-           var main = document.getElementById("tabelaDesp");
-          for(let i = 0; i < resposta.length; i++){
+          var feed = document.getElementById("tableDesp");
+          var main = document.getElementById("tabelaDesp");
+          for (let i = 0; i < resposta.length; i++) {
             var publicacao = resposta[i];
 
             var linhaResultado = document.createElement("tr");
@@ -291,24 +317,24 @@ function selectDesp(fkUser){
             // divResultado.appendChild(dataRespElement);
           }
         });
-      }else{
+      } else {
         throw ("Houve um erro na API")
       }
-    }).catch(function (resposta){
+    }).catch(function (resposta) {
       console.error(resposta);
     });
-}
+  }
 
 
-function selectEntr(fkUser){
-  fetch(`/entrada/selectEntr/${fkUser}`,
-         {
-            cache: "no-store",
-         }
-        ).then(function (resposta){
-            
-      if(resposta.ok){
-        if(resposta.status == 204){
+  function selectEntr(fkUser) {
+    fetch(`/entrada/selectEntr/${fkUser}`,
+      {
+        cache: "no-store",
+      }
+    ).then(function (resposta) {
+
+      if (resposta.ok) {
+        if (resposta.status == 204) {
           // var feed = document.getElementById("resultadosQuiz");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
@@ -318,7 +344,7 @@ function selectEntr(fkUser){
           throw "Nenhum resultado encontrado!!";
         }
 
-        resposta.json().then(function (resposta){
+        resposta.json().then(function (resposta) {
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
           //  var feed = document.getElementById("resultadosQuiz");
@@ -344,13 +370,12 @@ function selectEntr(fkUser){
           //   divResultado.appendChild(dataRespElement);
           // }
         });
-      }else{
+      } else {
         throw ("Houve um erro na API")
       }
-    }).catch(function (resposta){
+    }).catch(function (resposta) {
       console.error(resposta);
     });
-}
+  }
 
-  </script>
-    
+</script>

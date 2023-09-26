@@ -8,8 +8,16 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+router.post("/alterarInfo", function (req, res) {
+    usuarioController.alterarInfo(req, res);
+})
+
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
+});
+
+router.post("/selectInfo", function (req, res) {
+    usuarioController.selectInfo(req, res);
 });
 
 module.exports = router;
