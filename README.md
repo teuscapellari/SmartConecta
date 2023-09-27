@@ -19,4 +19,4 @@ O SmartConecta é um sistema para gerenciamento financeiro de condomínio. Onde 
 
 <hr>
 
-Copyright ©️ 2023 - Bruno Freitas, Eliel Roberto, Mateus Capellari, Rodrigo da Silva e Vinicius Kenzo.
+Copyright ©️ 2023 - Bruno Seigo, Eliel Roberto, Mateus Capellari, Rodrigo da Silva e Vinicius Kenzo.
