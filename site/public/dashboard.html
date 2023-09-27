@@ -1,73 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script
-      src="https://kit.fontawesome.com/89d28f01ec.js"
-      crossorigin="anonymous"
-    ></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://kit.fontawesome.com/89d28f01ec.js" crossorigin="anonymous"></script>
+
+  <style>
+    .historicos {
+      flex-direction: column;
+    }
+
+    .histDesp,
+    .histEntr {
+      margin-left: 50px;
+      width: 80%;
+      height: 80vh;
+    }
+
+    .menu {
+      height: 180vh;
+    }
+  </style>
 
 </head>
+
 <body>
 
-    <div class="home">
-        <div class="menu">
+  <div class="home">
+    <div class="menu">
 
-            <!-- HOME -->
-            <div class="iconHome" onclick="irHome()">
-                <img src="assets/home.png" alt="">
-            </div>
+      <!-- HOME -->
+      <div class="iconHome" onclick="irHome()">
+        <img src="assets/home.png" alt="">
+      </div>
 
-            <!-- DASHBOARD -->
-            <div class="iconDash" onclick="irDash()">
-              <img src="assets/dashboard.png" alt="">
-            </div>
+      <!-- DASHBOARD -->
+      <div class="iconDash" onclick="irDash()">
+        <img src="assets/dashboard.png" alt="">
+      </div>
 
+      <hr>
+
+      <!-- PERFIL -->
+      <div class="iconPerfil" onclick="irPerf()">
+        <img src="assets/user.png" alt="">
+      </div>
+
+      <!-- LOGOUT -->
+      <div class="iconLogout" onclick="logout()">
+        <img src="assets/import.png" alt=""> <!-- TROCAR DEPPOOOOOOOOIIIIISSSSSSS -->
+      </div>
+
+    </div>
+    <div class="contentHome">
+
+
+      <div class="historicos">
+        <div class="histDesp">
+          <h1>Visualizar Despesas</h1>
+          <div class="myChartDesp">
+            <canvas id="myChartDesp"></canvas>
+          </div>
         </div>
-        <div class="contentHome">
-            
+        <div class="histEntr">
+          <h1>Visualizar Entradas</h1>
+          <div class="myChartEntr">
+            <canvas id="myChartEntr"></canvas>
+          </div>
+        </div>
+      </div>
 
-            <div class="historicos">
-                <div class="histDesp">
-                    <h1>Visualizar Despesas</h1>
-                </div>
-                <div class="histEntr">
-                    <h1>Visualizar Entradas</h1>
-                </div>
-            </div>
-        
 </body>
+
 </html>
 
 <script>
 
-function openDesp() {
-  document.getElementById("myDesp").style.display = "block";
-}
+  function openDesp() {
+    document.getElementById("myDesp").style.display = "block";
+  }
 
-function closeDesp() {
-  document.getElementById("myDesp").style.display = "none";
-}
-function openEntr() {
-  document.getElementById("myEntr").style.display = "block";
-}
+  function closeDesp() {
+    document.getElementById("myDesp").style.display = "none";
+  }
+  function openEntr() {
+    document.getElementById("myEntr").style.display = "block";
+  }
 
-function closeEntr() {
-  document.getElementById("myEntr").style.display = "none";
-}
+  function closeEntr() {
+    document.getElementById("myEntr").style.display = "none";
+  }
 
-function irDash(){
-  window.location.href = "dashboard.html";
-}
+  function irDash() {
+    window.location.href = "dashboard.html";
+  }
 
-function irHome(){
-  window.location.href = "home.html";
-}
+  function irHome() {
+    window.location.href = "home.html";
+  }
 
-  </script>
-    
+  function logout() {
+    sessionStorage.ID_USUARIO = 0;
+    sessionStorage.EMAIL_USUARIO = "";
+    sessionStorage.NOME_USUARIO = "";
+    window.location.href = "login.html";
+  }
+
+  function irPerf() {
+    window.location.href = "perfil.html";
+  }
+
+  const ctxDesp = document.getElementById('myChartDesp');
+
+  new Chart(ctxDesp, {
+    type: 'line',
+    data: {
+      labels: ['15/08/23', '16/08/23', '17/08/23', '18/08/23', '19/08/23', '20/08/23', '21/08/23', '22/08/23', '23/08/23', '24/08/23', '25/08/23', '26/08/23', '27/08/23', '28/08/23', '29/08/23'],
+      datasets: [{
+        label: 'Despesas',
+        data: [1500, 150, 96.45, 156.23, 10.48, 36.45, 856.02, 364.89, 142.00, 644.13, 996.45, 120.62, 845.63, 852.52, 7896],
+        borderColor: '#FF0000',
+        tension: 0.1,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const ctxEntr = document.getElementById('myChartEntr');
+
+  new Chart(ctxEntr, {
+    type: 'line',
+    data: {
+      labels: ['15/08/23', '16/08/23', '17/08/23', '18/08/23', '19/08/23', '20/08/23', '21/08/23', '22/08/23', '23/08/23', '24/08/23', '25/08/23', '26/08/23', '27/08/23', '28/08/23', '29/08/23'],
+      datasets: [{
+        label: 'Entradas',
+        data: [2000, 400, 23.78, 16.23, 109.48, 386.45, 86.02, 3604.89, 14.00, 44.13, 96.45, 830.62, 65.63, 82.52, 5096],
+        borderColor: '#00FF00',
+        tension: 0.1,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+</script>

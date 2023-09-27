@@ -21,7 +21,7 @@
         <div class="menu">
 
             <!-- HOME -->
-            <div class="iconHome">
+            <div class="iconHome" onclick="irHome()">
                 <img src="assets/home.png" alt="">
             </div>
 
@@ -88,10 +88,12 @@
         window.location.href = "perfil.html";
     }
 
-
-
     function irDash() {
         window.location.href = "dashboard.html";
+    }
+
+    function irHome(){
+        window.location.href = "home.html";
     }
 
     var fkUser = sessionStorage.ID_USUARIO;

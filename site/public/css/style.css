@@ -546,8 +546,19 @@ tr{
 }
 
 th, td{
-    min-width: 75px;
     padding: 10px;
+}
+
+td{
+    width: 80px;
+}
+
+th{
+    width: 80px;
+}
+
+.myChartDesp, .myChartEntr{
+    width: 90%;
 }
 
 /* FIM DO HOME */

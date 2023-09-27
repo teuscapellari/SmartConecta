@@ -37,10 +37,7 @@ function alterarInfo(nome, email, telefone, fkUser) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        UPDATE usuario SET nome = '${nome}' WHERE idUser = '${fkUser}';
-        UPDATE usuario SET email = '${email}' WHERE idUser = '${fkUser}';
-        UPDATE usuario SET telefone = '${telefone}' WHERE idUser = '${fkUser}';
-    `;
+        UPDATE usuario SET nome = '${nome}', email = '${email}', telefone = '${telefone}' WHERE idUser = ${fkUser};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
