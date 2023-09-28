@@ -22,9 +22,6 @@
       height: 80vh;
     }
 
-    .menu {
-      height: 180vh;
-    }
   </style>
 
 </head>
@@ -58,7 +55,21 @@
 
     </div>
     <div class="contentHome">
-
+      <div class="registros">
+        <h3>Olá, <span id="nomeUser" class="nomeUser"></span></h3>
+        <div class="regDesp">
+          <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Vizualizar
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="#">Despesas</a>
+              <a href="#">Entradas</a>
+              <a href="#">Comparação</a>
+            </div>
+            </div> 
+        </div>
+      </div>
 
       <div class="historicos">
         <div class="histDesp">
@@ -115,6 +126,9 @@
     window.location.href = "perfil.html";
   }
 
+  nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
+
+
   const ctxDesp = document.getElementById('myChartDesp');
 
   new Chart(ctxDesp, {
@@ -160,5 +174,19 @@
       }
     }
   });
+
+  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
 
 </script>

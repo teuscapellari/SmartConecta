@@ -31,7 +31,7 @@ function selectEntr(fkUsuario) {
     valorEntr,
     descEntr
     FROM Entrada
-     WHERE fkUser = '${fkUsuario}';
+     WHERE fkUser = ${fkUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

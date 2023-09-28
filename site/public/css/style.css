@@ -6,10 +6,10 @@ body{
 
 header{
     width: 100%;
-    background-color: white;
+    background-color: rgb(121, 81, 158);
     display: flex;
     justify-content: center;
-    border-bottom: 1px gray solid;
+    border-bottom: 1px white solid;
     position: fixed;
 }
 
@@ -18,7 +18,7 @@ header{
     height: 50px;
     margin: auto;
     display: flex;
-    background-color: white;
+    background-color: rgb(121, 81, 158);
     justify-content: left;
     padding-left: 5%;
     align-items: center;
@@ -47,11 +47,12 @@ header ul li{
     justify-content: center;
     width: 150px;
     height: 100%;
+    color: white;
 }
 
 a{
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .btnLogin:hover, .btnSign:hover{
@@ -67,6 +68,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
 }
 
 .btnSign{
@@ -91,6 +93,11 @@ main{
 .quemSomos, .nossaSolucao{
     width: 100%;
     height: 100vh;
+    /* background: linear-gradient(
+        90deg,
+    rgb(185, 135, 232) 50%,
+    rgb(209, 183, 234) 50%
+    ); */
     background-image: linear-gradient( to right, #D1b7ea, #B987e8 );
     display: flex;
     flex-direction: column;
@@ -101,7 +108,7 @@ main{
     font-family: 'Poppins', sans-serif;
     font-size: 50px;
     margin: 0;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 .contentQuemSomos, .contentNossaSolucao{
@@ -242,22 +249,72 @@ main{
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
+    background: linear-gradient(
+        90deg,
+    rgb(185, 135, 232) 50%,
+    rgb(209, 183, 234) 50%
+    );
+}
+
+.mainCad{
+    height: 130vh;
 }
 
 .form, .formCad{
-    background-color: transparent;
+    background-color: #ffffff;
     width: 25%;
     padding: 30px;
     /* margin-bottom: 80px; */
     margin-top: 50px;
     height: 53vh;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    /* z-index: 10; */
 }
 
+.form a, .formCad a{
+    color: black;
+}
+
+/* .circulo{
+    transform: rotate(10deg);
+    left: 50%;
+    top: 50%;
+    opacity: 0.8;
+    position: absolute;
+    margin-top: 50px;
+    height: 525px;
+    width: 450px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 61px;
+    border-bottom-right-radius: 42px;
+    background-color: #B987e8;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4);
+    animation: 10s mover linear infinite;
+} */
+/* @keyframes mover {
+    100%{
+        transform: rotate(0deg);
+    }
+    75%{
+        transform: rotate(3deg);
+    }
+    50%{
+        transform: rotate(6deg);
+    }
+    25%{
+        transform: rotate(9deg);
+    }
+    0%{
+        transform: rotate(10deg);
+    }
+} */
+
 .formCad{
-    margin-top: 200px;
+    margin-top: 80px;
     height: 90vh;
     padding-bottom: 40px;
 }
@@ -298,6 +355,10 @@ main{
     border: 1px rgb(212, 210, 210) solid;
 }
 
+.mainLogin button:hover, .mainCad button:hover{
+    cursor: pointer;
+}
+
 .mainLogin button img, .mainCad button img{
     width: 15px;
 }
@@ -313,7 +374,7 @@ main{
     border: 1px rgb(212, 210, 210) solid;
 }
 
-.btnSignUpGoogle{
+/* .btnSignUpGoogle{
     background-color: white;
     color: black;
     border-radius: 5px;
@@ -321,7 +382,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .dontHave{
     display: flex;
@@ -340,13 +401,14 @@ main{
 }
 
 .menu{
-    background-color: blue;
+    background-color: rgb(121, 81, 158);
     width: 5%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: fixed;
 }
 
 .menu img{
@@ -377,13 +439,22 @@ main{
     font-family: 'Poppins', sans-serif; 
     display: flex;
     flex-direction: column;
+    margin-left: 5%;
 }
 
 .registros{
     display: flex;
     width: 100%;
-    justify-content: right;
+    justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.registros h3{
+    margin-left: 20px;
+}
+
+.registrosDiv{
+    display: flex;
 }
 
 .regDesp, .regEntr{
@@ -399,6 +470,10 @@ main{
     text-decoration: underline;
     cursor: pointer;
 }
+
+/* .nomeUser{
+    margin-left: 20px;
+} */
 
 .historicos, .infoUser{
     width: 100%;
@@ -573,7 +648,7 @@ th{
 }
 
 footer {
-  background-color:#d0b5ea;
+  background-color:rgb(121, 81, 158);
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -630,7 +705,7 @@ footer h2 {
 }
 
 .filhoFooter ul li a:hover {
-  color: blueviolet;
+  color: rgb(42, 15, 65);
 }
 
 .redes,
@@ -648,3 +723,54 @@ i {
 }
 
 
+/* TESTEEEEEEEE */
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: black;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+    margin-right: 50px;
+    border-radius: 5px;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: rgb(121, 81, 158);
+    color: white;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(121, 81, 158);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .show {
+    display: block;
+  }

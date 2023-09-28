@@ -45,11 +45,14 @@
     </div>
     <div class="contentHome">
       <div class="registros">
-        <div class="regDesp">
-          <p onclick="openDesp()">Registrar Despesa</p>
+        <h3>Olá, <span id="nomeUser" class="nomeUser"></span></h3>
+        <div class="registrosDiv">
+          <div class="regDesp">
+            <p onclick="openDesp()">Registrar Despesa</p>
+          </div>
+          <div class="regEntr">
+            <p onclick="openEntr()">Registrar Entrada</p>  
         </div>
-        <div class="regEntr">
-          <p onclick="openEntr()">Registrar Entrada</p>
         </div>
       </div>
 
@@ -71,6 +74,18 @@
         </div>
         <div class="histEntr">
           <h1>Histórico de Entradas</h1>
+          <div class="tabelaEntr" id="tabelaEntr">
+            <table id="tableEntr" class="tableEntr">
+              <tr>
+                <th>Nome</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Valor</th>
+                <th>Descrição</th>
+              </tr>
+
+            </table>
+          </div>
         </div>
       </div>
 
@@ -153,6 +168,7 @@
   }
 
   var fkUser = sessionStorage.ID_USUARIO;
+  nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
 
 
   // setInterval(() =>{
@@ -336,40 +352,51 @@
 
       if (resposta.ok) {
         if (resposta.status == 204) {
-          // var feed = document.getElementById("resultadosQuiz");
+          var feed = document.getElementById("tableEntr");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
-          // var mensagem = document.createElement("p");
-          // mensagem.innerHTML = "Você ainda não realizou nenhuma tentativa :)" //SE NÂO APARECER NADA, MUDAR AQUI
-          // feed.appendChild(mensagem);
+          var mensagem = document.createElement("td");
+          mensagem.innerHTML = "Você ainda não possui entradas :)" //SE NÂO APARECER NADA, MUDAR AQUI
+          feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
         }
 
         resposta.json().then(function (resposta) {
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-          //  var feed = document.getElementById("resultadosQuiz");
-          //  var main = document.getElementById("idMainQuiz");
-          // feed.innerHTML = "";
-          // for(let i = 0; i < resposta.length; i++){
-          //   var publicacao = resposta[i];
+          var feed = document.getElementById("tableEntr");
+          var main = document.getElementById("tabelaEntr");
+          for (let i = 0; i < resposta.length; i++) {
+            var publicacao = resposta[i];
 
-          //   var divResultado = document.createElement("div");
-          //   var qtdAcertosElement = document.createElement("p");
-          //   var fkUsuarioElement = document.createElement("p");
-          //   var dataRespElement = document.createElement("p");
+            var linhaResultado = document.createElement("tr");
+            var nome = document.createElement("td");
+            var data = document.createElement("td");
+            var hora = document.createElement("td");
+            var valor = document.createElement("td");
+            var descricao = document.createElement("td");
+            // var fkUsuarioElement = document.createElement("p");
+            // var dataRespElement = document.createElement("p");
 
-          //   qtdAcertosElement.innerHTML = `Quantidade de acertos: ${publicacao.qtdAcertos}`;
-          //   fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
-          //   dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+            nome.innerHTML = `${publicacao.nomeEntr}`;
+            data.innerHTML = `${publicacao.dataEntr}`;
+            hora.innerHTML = `${publicacao.horaEntr}`;
+            valor.innerHTML = `R$${publicacao.valorEntr}`;
+            descricao.innerHTML = `${publicacao.descEntr}`;
+            // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+            // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
 
-          //   divResultado.className = "resultadosQuiz";
+            // divResultado.className = "resultadosQuiz";
 
-          //   main.appendChild(divResultado);
-          //   divResultado.appendChild(qtdAcertosElement);
-          //   divResultado.appendChild(fkUsuarioElement);
-          //   divResultado.appendChild(dataRespElement);
-          // }
+            main.appendChild(linhaResultado);
+            linhaResultado.appendChild(nome);
+            linhaResultado.appendChild(data);
+            linhaResultado.appendChild(hora);
+            linhaResultado.appendChild(valor);
+            linhaResultado.appendChild(descricao);
+            // divResultado.appendChild(fkUsuarioElement);
+            // divResultado.appendChild(dataRespElement);
+          }
         });
       } else {
         throw ("Houve um erro na API")
