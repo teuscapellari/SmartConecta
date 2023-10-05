@@ -16,10 +16,15 @@
     }
 
     .histDesp,
-    .histEntr {
+    .histEntr,
+    .histComp{
       margin-left: 50px;
       width: 80%;
       height: 80vh;
+    }
+
+    .histEntr, .histComp{
+    display: none;
     }
 
   </style>
@@ -63,25 +68,31 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content" id="myDropdown">
-              <a href="#">Despesas</a>
-              <a href="#">Entradas</a>
-              <a href="#">Comparação</a>
+              <a href="#" onclick="vizuDesp()">Despesas</a>
+              <a href="#" onclick="vizuEntr()">Entradas</a>
+              <a href="#" onclick="vizuComp()">Comparação</a>
             </div>
             </div> 
         </div>
       </div>
 
       <div class="historicos">
-        <div class="histDesp">
+        <div class="histDesp" id="histDesp">
           <h1>Visualizar Despesas</h1>
           <div class="myChartDesp">
             <canvas id="myChartDesp"></canvas>
           </div>
         </div>
-        <div class="histEntr">
+        <div class="histEntr" id="histEntr">
           <h1>Visualizar Entradas</h1>
           <div class="myChartEntr">
             <canvas id="myChartEntr"></canvas>
+          </div>
+        </div>
+        <div class="histComp" id="histComp">
+          <h1>Visualizar Comparação</h1>
+          <div class="myChartComp">
+            <canvas id="myChartComp"></canvas>
           </div>
         </div>
       </div>
@@ -126,6 +137,24 @@
     window.location.href = "perfil.html";
   }
 
+  function vizuDesp(){
+    histDesp.style.display = "block";
+    histEntr.style.display = "none";
+    histComp.style.display = "none";
+  }
+
+  function vizuEntr(){
+    histEntr.style.display = "block";
+    histComp.style.display = "none";
+    histDesp.style.display = "none";
+  }
+
+  function vizuComp(){
+    histComp.style.display = "block";
+    histEntr.style.display = "none";
+    histDesp.style.display = "none";
+  }
+
   nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
 
 
@@ -139,6 +168,7 @@
         label: 'Despesas',
         data: [1500, 150, 96.45, 156.23, 10.48, 36.45, 856.02, 364.89, 142.00, 644.13, 996.45, 120.62, 845.63, 852.52, 7896],
         borderColor: '#FF0000',
+        backgroundColor: '#FF0000',
         tension: 0.1,
         borderWidth: 1
       }]
@@ -162,6 +192,7 @@
         label: 'Entradas',
         data: [2000, 400, 23.78, 16.23, 109.48, 386.45, 86.02, 3604.89, 14.00, 44.13, 96.45, 830.62, 65.63, 82.52, 5096],
         borderColor: '#00FF00',
+        backgroundColor: '#00FF00',
         tension: 0.1,
         borderWidth: 1
       }]
@@ -174,6 +205,35 @@
       }
     }
   });
+
+  const ctxComp = document.getElementById('myChartComp');
+
+  const mixedChart = new Chart(ctxComp, {
+   type: 'bar',
+   data: {
+       datasets: [{
+           label: 'Despesa',
+           data: [1500, 150, 96.45, 156.23, 10.48, 36.45, 856.02, 364.89, 142.00, 644.13, 996.45, 120.62, 845.63, 852.52, 7896],
+           borderColor: '#FF0000',
+           backgroundColor: '#FF0000',
+          //  tension: 0.1,
+          //  borderWidth: 1,
+           // this dataset is drawn below
+           order: 2
+       }, {
+           label: 'Entrada',
+           data: [2000, 400, 23.78, 16.23, 109.48, 386.45, 86.02, 3604.89, 14.00, 44.13, 96.45, 830.62, 65.63, 82.52, 5096],
+           borderColor: '#00FF00',
+           backgroundColor: '#00FF00',
+           type: 'bar',
+          //  tension: 0.1,
+          //  borderWidth: 1,
+           // this dataset is drawn on top
+           order: 1
+       }],
+       labels: ['15/08/23', '16/08/23', '17/08/23', '18/08/23', '19/08/23', '20/08/23', '21/08/23', '22/08/23', '23/08/23', '24/08/23', '25/08/23', '26/08/23', '27/08/23', '28/08/23', '29/08/23']
+   }
+});
 
   function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
