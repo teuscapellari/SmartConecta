@@ -8,6 +8,10 @@ router.post("/cadastrar", function (req, res) {
     usuarioController.cadastrar(req, res);
 })
 
+router.get("/selectMorad/:fkUser", function (req, res){
+    usuarioController.selectMorad(req, res);
+});
+
 router.post("/alterarInfo", function (req, res) {
     usuarioController.alterarInfo(req, res);
 })

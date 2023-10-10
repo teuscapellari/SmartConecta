@@ -129,9 +129,28 @@ function alterarInfo(req, res) {
             );
 }
 
+function selectMorad(req, res) {
+    var fkUsuario = req.params.fkUser;
+    usuarioModel.selectMorad(fkUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     selectInfo,
-    alterarInfo
+    alterarInfo,
+    selectMorad
 }

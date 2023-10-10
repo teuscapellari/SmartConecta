@@ -32,7 +32,7 @@
       </div>
 
       <!-- ADD MORADOR -->
-      <div class="iconAdd" onclick="irAddMora()">
+      <div class="iconAdd" id="idiconAdd" onclick="irAddMora()">
         <img src="assets/three-dots.png" alt="">
       </div>
 
@@ -53,10 +53,10 @@
       <div class="registros">
         <h3>Olá, <span id="nomeUser" class="nomeUser"></span></h3>
         <div class="registrosDiv">
-          <div class="regDesp">
+          <div class="regDesp" id="idregDesp">
             <p onclick="openDesp()">Registrar Despesa</p>
           </div>
-          <div class="regEntr">
+          <div class="regEntr" id="idregEntr">
             <p onclick="openEntr()">Registrar Entrada</p>  
         </div>
         </div>
@@ -162,6 +162,12 @@
     window.location.href = "index.html"
   }
 
+  if(sessionStorage.SINDICO == 0){
+    idregDesp.style.display = 'none';
+    idregEntr.style.display = 'none';
+    idiconAdd.style.display = 'none';
+  }
+
   function logout() {
     sessionStorage.ID_USUARIO = 0;
     sessionStorage.EMAIL_USUARIO = "";
@@ -177,7 +183,11 @@
     window.location.href = "adicionarMorador.html"
   }
 
-  var fkUser = sessionStorage.ID_USUARIO;
+  if(sessionStorage.SINDICO == 0){
+    var fkUser = sessionStorage.FKSINDICO;
+  } else{
+    var fkUser = sessionStorage.ID_USUARIO;
+  }
   nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
 
 

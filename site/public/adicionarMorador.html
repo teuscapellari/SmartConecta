@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
   <!-- <script
       src="https://kit.fontawesome.com/89d28f01ec.js"
@@ -66,30 +67,55 @@
           <h1>Adicionar Morador</h1>
           <div class="camposUser addMorad">
 
-            <label for="Nome">Nome:</label>
-            <input type="text" name="" id="ipt_nome" required>
+            <form onsubmit="return false">
 
-            <label for="Email">E-mail:</label>
-            <input type="email" name="" id="ipt_email" required>
+              <label for="Nome">Nome:</label>
+              <input type="text" name="" id="ipt_nome" required>
 
-            <label for="Telefone">Telefone: </label>
-            <input type="tel" name="" id="ipt_telefone" required>
+              <br>
+  
+              <label for="Email">E-mail:</label>
+              <input type="email" name="" id="ipt_email" required>
 
-            <label for="">Bloco:</label>
-            <input type="text" name="" id="ipt_bloco">
+              <br>
+  
+              <label for="Telefone">Telefone: </label>
+              <input type="tel" name="" id="ipt_telefone" required>
 
-            <label for="">Torre:</label>
-            <input type="text" name="" id="ipt_torre">
+              <br>
+  
+              <label for="">Bloco:</label>
+              <input type="text" name="" id="ipt_bloco">
 
-            <label for="">Apartamento:</label>
-            <input type="text" name="" id="ipt_apartamento" required>
+              <br>
+  
+              <label for="">Torre:</label>
+              <input type="text" name="" id="ipt_torre">
+              
+              <br>
+  
+              <label for="">Apartamento:</label>
+              <input type="text" name="" id="ipt_apartamento" required>
+  
+              <button onclick="addMorad()" class="addMoradBtn">Adicionar Morador</button>
+            </form>
 
-            <button onclick="addMorad()" class="addMoradBtn">Adicionar Morador</button>
           </div>
         </div>
         <div class="histEntr">
           <h1>Moradores Adicionados</h1>
-          
+          <div class="tabelaMorad" id="tabelaMorad">
+            <table id="tableMorad" class="tableMorad">
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Apartamento</th>
+                <!-- <th>Descrição</th> -->
+              </tr>
+
+            </table>
+          </div>
         </div>
       </div>
 
@@ -180,8 +206,9 @@
 
 
   // setInterval(() =>{
-  selectDesp(fkUser);
-  selectEntr(fkUser);
+    selectMorad(fkUser);
+  // selectDesp(fkUser);
+  // selectEntr(fkUser);
   // }, 5000);
 
   function openDesp() {
@@ -256,7 +283,7 @@
             title: 'Cadastrado com sucesso',
             html: 'Redirecionando em <b></b> milisegundos.',
             icon: 'success',
-            timer: 2000,
+            timer: 1000,
             timerProgressBar: true,
             didOpen: () => {
               Swal.showLoading()
@@ -275,9 +302,9 @@
             }
           })
 
-          // setTimeout(() => {
-          //   window.location.href = "login.html";
-          // },2000);
+          setTimeout(() => {
+            window.location.reload();
+          },1000);
                 
             }else{
                 throw("Houve um erro ao tentar realizar o cadastro!")
@@ -288,90 +315,8 @@
         return false;
     }
 
-  function regDesp() {
-    var nomeVar = ipt_nomeDesp.value;
-    var dataVar = ipt_dataDesp.value;
-    var horaVar = ipt_horaDesp.value;
-    var valorVar = ipt_valorDesp.value;
-    var descVar = ipt_descDesp.value;
-    var fkUserVar = sessionStorage.ID_USUARIO;
-
-    fetch("/despesa/registrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nomeServer: nomeVar,
-        dataServer: dataVar,
-        horaServer: horaVar,
-        valorServer: valorVar,
-        descServer: descVar,
-        fkUserServer: fkUserVar
-      })
-    }).then(function (resposta) {
-      console.log("resposta: ", resposta);
-
-      if (resposta.ok) {
-
-        window.location.reload();
-        alert("Despesa registrada!");
-        openDesp();
-        selectDesp(fkUser);
-
-      } else {
-        throw ("Houve um erro ao tentar realizar o registro da despesa!")
-      }
-    }).catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-    });
-
-    return false;
-  }
-
-  function regEntr() {
-    var nomeVar = ipt_nomeEntr.value;
-    var dataVar = ipt_dataEntr.value;
-    var horaVar = ipt_horaEntr.value;
-    var valorVar = ipt_valorEntr.value;
-    var descVar = ipt_descEntr.value;
-    var fkUserVar = sessionStorage.ID_USUARIO;
-
-    fetch("/entrada/registrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        nomeServer: nomeVar,
-        dataServer: dataVar,
-        horaServer: horaVar,
-        valorServer: valorVar,
-        descServer: descVar,
-        fkUserServer: fkUserVar
-      })
-    }).then(function (resposta) {
-      console.log("resposta: ", resposta);
-
-      if (resposta.ok) {
-
-        alert("Entrada registrada!");
-        window.location.reload();
-
-      } else {
-        throw ("Houve um erro ao tentar realizar o registro da entrada!")
-      }
-    }).catch(function (resposta) {
-      console.log(`#ERRO: ${resposta}`);
-    });
-
-    return false;
-  }
-
-
-
-  function selectDesp(fkUser) {
-    fetch(`/despesa/selectDesp/${fkUser}`,
+    function selectMorad(fkUser) {
+    fetch(`/usuarios/selectMorad/${fkUser}`,
       {
         cache: "no-store",
       }
@@ -379,11 +324,11 @@
 
       if (resposta.ok) {
         if (resposta.status == 204) {
-          var feed = document.getElementById("tableDesp");
+          var feed = document.getElementById("tableMorad");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
           var mensagem = document.createElement("td");
-          mensagem.innerHTML = "Você ainda não possui despesas :)" //SE NÂO APARECER NADA, MUDAR AQUI
+          mensagem.innerHTML = "Você ainda não possui moradores :)" //SE NÂO APARECER NADA, MUDAR AQUI
           feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
         }
@@ -391,25 +336,25 @@
         resposta.json().then(function (resposta) {
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-          var feed = document.getElementById("tableDesp");
-          var main = document.getElementById("tabelaDesp");
+          var feed = document.getElementById("tableMorad");
+          var main = document.getElementById("tableMorad");
           for (let i = 0; i < resposta.length; i++) {
             var publicacao = resposta[i];
 
             var linhaResultado = document.createElement("tr");
             var nome = document.createElement("td");
-            var data = document.createElement("td");
-            var hora = document.createElement("td");
-            var valor = document.createElement("td");
-            var descricao = document.createElement("td");
+            var email = document.createElement("td");
+            var telefone = document.createElement("td");
+            var apartamento = document.createElement("td");
+            // var descricao = document.createElement("td");
             // var fkUsuarioElement = document.createElement("p");
             // var dataRespElement = document.createElement("p");
 
-            nome.innerHTML = `${publicacao.nomeDesp}`;
-            data.innerHTML = `${publicacao.dataDesp}`;
-            hora.innerHTML = `${publicacao.horaDesp}`;
-            valor.innerHTML = `R$${publicacao.valorDesp}`;
-            descricao.innerHTML = `${publicacao.descDesp}`;
+            nome.innerHTML = `${publicacao.nome}`;
+            email.innerHTML = `${publicacao.email}`;
+            telefone.innerHTML = `${publicacao.telefone}`;
+            apartamento.innerHTML = `${publicacao.apartamento}`;
+            // descricao.innerHTML = `${publicacao.descEntr}`;
             // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
             // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
 
@@ -417,10 +362,10 @@
 
             main.appendChild(linhaResultado);
             linhaResultado.appendChild(nome);
-            linhaResultado.appendChild(data);
-            linhaResultado.appendChild(hora);
-            linhaResultado.appendChild(valor);
-            linhaResultado.appendChild(descricao);
+            linhaResultado.appendChild(email);
+            linhaResultado.appendChild(telefone);
+            linhaResultado.appendChild(apartamento);
+            // linhaResultado.appendChild(descricao);
             // divResultado.appendChild(fkUsuarioElement);
             // divResultado.appendChild(dataRespElement);
           }
@@ -434,67 +379,213 @@
   }
 
 
-  function selectEntr(fkUser) {
-    fetch(`/entrada/selectEntr/${fkUser}`,
-      {
-        cache: "no-store",
-      }
-    ).then(function (resposta) {
+  // function regDesp() {
+  //   var nomeVar = ipt_nomeDesp.value;
+  //   var dataVar = ipt_dataDesp.value;
+  //   var horaVar = ipt_horaDesp.value;
+  //   var valorVar = ipt_valorDesp.value;
+  //   var descVar = ipt_descDesp.value;
+  //   var fkUserVar = sessionStorage.ID_USUARIO;
 
-      if (resposta.ok) {
-        if (resposta.status == 204) {
-          var feed = document.getElementById("tableEntr");
-          // resultadosQuiz.style.display = 'flex';
-          // resultadosQuiz.style.color = '#FFFFFF';
-          var mensagem = document.createElement("td");
-          mensagem.innerHTML = "Você ainda não possui entradas :)" //SE NÂO APARECER NADA, MUDAR AQUI
-          feed.appendChild(mensagem);
-          throw "Nenhum resultado encontrado!!";
-        }
+  //   fetch("/despesa/registrar", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       nomeServer: nomeVar,
+  //       dataServer: dataVar,
+  //       horaServer: horaVar,
+  //       valorServer: valorVar,
+  //       descServer: descVar,
+  //       fkUserServer: fkUserVar
+  //     })
+  //   }).then(function (resposta) {
+  //     console.log("resposta: ", resposta);
 
-        resposta.json().then(function (resposta) {
-          console.log("Dados recebidos: ", JSON.stringify(resposta));
+  //     if (resposta.ok) {
 
-          var feed = document.getElementById("tableEntr");
-          var main = document.getElementById("tabelaEntr");
-          for (let i = 0; i < resposta.length; i++) {
-            var publicacao = resposta[i];
+  //       window.location.reload();
+  //       alert("Despesa registrada!");
+  //       openDesp();
+  //       selectDesp(fkUser);
 
-            var linhaResultado = document.createElement("tr");
-            var nome = document.createElement("td");
-            var data = document.createElement("td");
-            var hora = document.createElement("td");
-            var valor = document.createElement("td");
-            var descricao = document.createElement("td");
-            // var fkUsuarioElement = document.createElement("p");
-            // var dataRespElement = document.createElement("p");
+  //     } else {
+  //       throw ("Houve um erro ao tentar realizar o registro da despesa!")
+  //     }
+  //   }).catch(function (resposta) {
+  //     console.log(`#ERRO: ${resposta}`);
+  //   });
 
-            nome.innerHTML = `${publicacao.nomeEntr}`;
-            data.innerHTML = `${publicacao.dataEntr}`;
-            hora.innerHTML = `${publicacao.horaEntr}`;
-            valor.innerHTML = `R$${publicacao.valorEntr}`;
-            descricao.innerHTML = `${publicacao.descEntr}`;
-            // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
-            // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+  //   return false;
+  // }
 
-            // divResultado.className = "resultadosQuiz";
+  // function regEntr() {
+  //   var nomeVar = ipt_nomeEntr.value;
+  //   var dataVar = ipt_dataEntr.value;
+  //   var horaVar = ipt_horaEntr.value;
+  //   var valorVar = ipt_valorEntr.value;
+  //   var descVar = ipt_descEntr.value;
+  //   var fkUserVar = sessionStorage.ID_USUARIO;
 
-            main.appendChild(linhaResultado);
-            linhaResultado.appendChild(nome);
-            linhaResultado.appendChild(data);
-            linhaResultado.appendChild(hora);
-            linhaResultado.appendChild(valor);
-            linhaResultado.appendChild(descricao);
-            // divResultado.appendChild(fkUsuarioElement);
-            // divResultado.appendChild(dataRespElement);
-          }
-        });
-      } else {
-        throw ("Houve um erro na API")
-      }
-    }).catch(function (resposta) {
-      console.error(resposta);
-    });
-  }
+  //   fetch("/entrada/registrar", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       nomeServer: nomeVar,
+  //       dataServer: dataVar,
+  //       horaServer: horaVar,
+  //       valorServer: valorVar,
+  //       descServer: descVar,
+  //       fkUserServer: fkUserVar
+  //     })
+  //   }).then(function (resposta) {
+  //     console.log("resposta: ", resposta);
+
+  //     if (resposta.ok) {
+
+  //       alert("Entrada registrada!");
+  //       window.location.reload();
+
+  //     } else {
+  //       throw ("Houve um erro ao tentar realizar o registro da entrada!")
+  //     }
+  //   }).catch(function (resposta) {
+  //     console.log(`#ERRO: ${resposta}`);
+  //   });
+
+  //   return false;
+  // }
+
+
+
+  // function selectDesp(fkUser) {
+  //   fetch(`/despesa/selectDesp/${fkUser}`,
+  //     {
+  //       cache: "no-store",
+  //     }
+  //   ).then(function (resposta) {
+
+  //     if (resposta.ok) {
+  //       if (resposta.status == 204) {
+  //         var feed = document.getElementById("tableDesp");
+  //         // resultadosQuiz.style.display = 'flex';
+  //         // resultadosQuiz.style.color = '#FFFFFF';
+  //         var mensagem = document.createElement("td");
+  //         mensagem.innerHTML = "Você ainda não possui despesas :)" //SE NÂO APARECER NADA, MUDAR AQUI
+  //         feed.appendChild(mensagem);
+  //         throw "Nenhum resultado encontrado!!";
+  //       }
+
+  //       resposta.json().then(function (resposta) {
+  //         console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+  //         var feed = document.getElementById("tableDesp");
+  //         var main = document.getElementById("tabelaDesp");
+  //         for (let i = 0; i < resposta.length; i++) {
+  //           var publicacao = resposta[i];
+
+  //           var linhaResultado = document.createElement("tr");
+  //           var nome = document.createElement("td");
+  //           var data = document.createElement("td");
+  //           var hora = document.createElement("td");
+  //           var valor = document.createElement("td");
+  //           var descricao = document.createElement("td");
+  //           // var fkUsuarioElement = document.createElement("p");
+  //           // var dataRespElement = document.createElement("p");
+
+  //           nome.innerHTML = `${publicacao.nomeDesp}`;
+  //           data.innerHTML = `${publicacao.dataDesp}`;
+  //           hora.innerHTML = `${publicacao.horaDesp}`;
+  //           valor.innerHTML = `R$${publicacao.valorDesp}`;
+  //           descricao.innerHTML = `${publicacao.descDesp}`;
+  //           // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+  //           // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+  //           // divResultado.className = "resultadosQuiz";
+
+  //           main.appendChild(linhaResultado);
+  //           linhaResultado.appendChild(nome);
+  //           linhaResultado.appendChild(data);
+  //           linhaResultado.appendChild(hora);
+  //           linhaResultado.appendChild(valor);
+  //           linhaResultado.appendChild(descricao);
+  //           // divResultado.appendChild(fkUsuarioElement);
+  //           // divResultado.appendChild(dataRespElement);
+  //         }
+  //       });
+  //     } else {
+  //       throw ("Houve um erro na API")
+  //     }
+  //   }).catch(function (resposta) {
+  //     console.error(resposta);
+  //   });
+  // }
+
+
+  // function selectEntr(fkUser) {
+  //   fetch(`/entrada/selectEntr/${fkUser}`,
+  //     {
+  //       cache: "no-store",
+  //     }
+  //   ).then(function (resposta) {
+
+  //     if (resposta.ok) {
+  //       if (resposta.status == 204) {
+  //         var feed = document.getElementById("tableEntr");
+  //         // resultadosQuiz.style.display = 'flex';
+  //         // resultadosQuiz.style.color = '#FFFFFF';
+  //         var mensagem = document.createElement("td");
+  //         mensagem.innerHTML = "Você ainda não possui entradas :)" //SE NÂO APARECER NADA, MUDAR AQUI
+  //         feed.appendChild(mensagem);
+  //         throw "Nenhum resultado encontrado!!";
+  //       }
+
+  //       resposta.json().then(function (resposta) {
+  //         console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+  //         var feed = document.getElementById("tableEntr");
+  //         var main = document.getElementById("tabelaEntr");
+  //         for (let i = 0; i < resposta.length; i++) {
+  //           var publicacao = resposta[i];
+
+  //           var linhaResultado = document.createElement("tr");
+  //           var nome = document.createElement("td");
+  //           var data = document.createElement("td");
+  //           var hora = document.createElement("td");
+  //           var valor = document.createElement("td");
+  //           var descricao = document.createElement("td");
+  //           // var fkUsuarioElement = document.createElement("p");
+  //           // var dataRespElement = document.createElement("p");
+
+  //           nome.innerHTML = `${publicacao.nomeEntr}`;
+  //           data.innerHTML = `${publicacao.dataEntr}`;
+  //           hora.innerHTML = `${publicacao.horaEntr}`;
+  //           valor.innerHTML = `R$${publicacao.valorEntr}`;
+  //           descricao.innerHTML = `${publicacao.descEntr}`;
+  //           // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+  //           // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+  //           // divResultado.className = "resultadosQuiz";
+
+  //           main.appendChild(linhaResultado);
+  //           linhaResultado.appendChild(nome);
+  //           linhaResultado.appendChild(data);
+  //           linhaResultado.appendChild(hora);
+  //           linhaResultado.appendChild(valor);
+  //           linhaResultado.appendChild(descricao);
+  //           // divResultado.appendChild(fkUsuarioElement);
+  //           // divResultado.appendChild(dataRespElement);
+  //         }
+  //       });
+  //     } else {
+  //       throw ("Houve um erro na API")
+  //     }
+  //   }).catch(function (resposta) {
+  //     console.error(resposta);
+  //   });
+  // }
 
 </script>
