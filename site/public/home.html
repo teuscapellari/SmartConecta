@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
   <!-- <script
       src="https://kit.fontawesome.com/89d28f01ec.js"
@@ -63,7 +64,7 @@
 
       <div class="historicos">
         <div class="histDesp">
-          <h1>Histórico de Despesas</h1>
+          <h1>Histórico de Despesas <img src="assets/arrow-desp.png" alt=""> <span id="valorDespesa"></span></h1>
           <div class="tabelaDesp" id="tabelaDesp">
             <table id="tableDesp" class="tableDesp">
               <tr>
@@ -78,7 +79,7 @@
           </div>
         </div>
         <div class="histEntr">
-          <h1>Histórico de Entradas</h1>
+          <h1>Histórico de Entradas <img src="assets/arrow-entr.png" alt=""> <span id="valorEntrada"></span></h1>
           <div class="tabelaEntr" id="tabelaEntr">
             <table id="tableEntr" class="tableEntr">
               <tr>
@@ -96,7 +97,7 @@
 
 
       <div class="form-popup" id="myDesp">
-        <form class="form-container">
+        <form class="form-container" onsubmit="return false">
           <h1>Registrar Despesa</h1>
 
           <label for="title">Nome: </label>
@@ -124,7 +125,7 @@
     </div>
 
     <div class="form-popup" id="myEntr">
-      <form class="form-container">
+      <form class="form-container" onsubmit="return false">
         <h1>Registrar Entrada</h1>
 
         <label for="title">Nome: </label>
@@ -232,10 +233,37 @@
 
       if (resposta.ok) {
 
-        window.location.reload();
-        alert("Despesa registrada!");
-        openDesp();
-        selectDesp(fkUser);
+        
+        let timerInterval
+          Swal.fire({
+            title: 'Despesa registrada com sucesso',
+            html: 'Atualizando em <b></b> milisegundos.',
+            icon: 'success',
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+        
+        setInterval(() => {
+          window.location.reload();
+        },1000)
+        
+        // openDesp();
+        // selectDesp(fkUser);
 
       } else {
         throw ("Houve um erro ao tentar realizar o registro da despesa!")
@@ -273,8 +301,36 @@
 
       if (resposta.ok) {
 
-        alert("Entrada registrada!");
-        window.location.reload();
+        let timerInterval
+          Swal.fire({
+            title: 'Entrada registrada com sucesso',
+            html: 'Atualizando em <b></b> milisegundos.',
+            icon: 'success',
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+        
+        setInterval(() => {
+          window.location.reload();
+        },1000)
+        
+        // openDesp();
+        // selectDesp(fkUser);
 
       } else {
         throw ("Houve um erro ao tentar realizar o registro da entrada!")
@@ -287,6 +343,7 @@
   }
 
 
+  var somaDespesa = 0;
 
   function selectDesp(fkUser) {
     fetch(`/despesa/selectDesp/${fkUser}`,
@@ -297,10 +354,10 @@
 
       if (resposta.ok) {
         if (resposta.status == 204) {
-          var feed = document.getElementById("tableDesp");
+          var feed = document.getElementById("tabelaDesp");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
-          var mensagem = document.createElement("td");
+          var mensagem = document.createElement("p");
           mensagem.innerHTML = "Você ainda não possui despesas :)" //SE NÂO APARECER NADA, MUDAR AQUI
           feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
@@ -310,7 +367,7 @@
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
           var feed = document.getElementById("tableDesp");
-          var main = document.getElementById("tabelaDesp");
+          var main = document.getElementById("tableDesp");
           for (let i = 0; i < resposta.length; i++) {
             var publicacao = resposta[i];
 
@@ -322,6 +379,9 @@
             var descricao = document.createElement("td");
             // var fkUsuarioElement = document.createElement("p");
             // var dataRespElement = document.createElement("p");
+
+            somaDespesa = parseFloat(somaDespesa) + parseFloat(publicacao.valorDesp);
+            valorDespesa.innerHTML = 'R$' + parseFloat(somaDespesa);
 
             nome.innerHTML = `${publicacao.nomeDesp}`;
             data.innerHTML = `${publicacao.dataDesp}`;
@@ -351,6 +411,7 @@
     });
   }
 
+  var somaEntrada = 0;
 
   function selectEntr(fkUser) {
     fetch(`/entrada/selectEntr/${fkUser}`,
@@ -361,10 +422,10 @@
 
       if (resposta.ok) {
         if (resposta.status == 204) {
-          var feed = document.getElementById("tableEntr");
+          var feed = document.getElementById("tabelaEntr");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
-          var mensagem = document.createElement("td");
+          var mensagem = document.createElement("p");
           mensagem.innerHTML = "Você ainda não possui entradas :)" //SE NÂO APARECER NADA, MUDAR AQUI
           feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
@@ -374,7 +435,7 @@
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
           var feed = document.getElementById("tableEntr");
-          var main = document.getElementById("tabelaEntr");
+          var main = document.getElementById("tableEntr");
           for (let i = 0; i < resposta.length; i++) {
             var publicacao = resposta[i];
 
@@ -386,6 +447,9 @@
             var descricao = document.createElement("td");
             // var fkUsuarioElement = document.createElement("p");
             // var dataRespElement = document.createElement("p");
+
+            somaEntrada = parseFloat(somaEntrada) + parseFloat(publicacao.valorEntr);
+            valorEntrada.innerHTML = 'R$' + parseFloat(somaEntrada);
 
             nome.innerHTML = `${publicacao.nomeEntr}`;
             data.innerHTML = `${publicacao.dataEntr}`;

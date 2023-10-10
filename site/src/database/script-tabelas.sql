@@ -16,7 +16,7 @@ CREATE TABLE Despesa(
     nomeDesp VARCHAR(45) NOT NULL,
     dataDesp DATE NOT NULL,
     horaDesp TIME,
-    valorDesp DECIMAL(6,2) NOT NULL,
+    valorDesp DECIMAL(8,2) NOT NULL,
     descDesp VARCHAR(200) NOT NULL,
     fkUser INT,
     FOREIGN KEY(fkUser) REFERENCES Usuario(idUser)

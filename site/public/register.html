@@ -10,6 +10,7 @@
       src="https://kit.fontawesome.com/89d28f01ec.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -164,6 +165,11 @@
         var senhaVar = senha_cad.value;
         var confSenhaVar = senhaCf_cad.value;
         var telefoneVar = number_cad.value;
+        var sindicoVar = 1;
+        var blocoVar = null;
+        var torreVar = null;
+        var apartamentoVar = null;
+        var fkSindicoVar = null;
 
         fetch("/usuarios/cadastrar", {
             method: "POST",
@@ -174,17 +180,45 @@
                 nomeServer: nomeVar,
                 emailServer: emailVar,
                 senhaServer: senhaVar,
-                telefoneServer: telefoneVar
+                telefoneServer: telefoneVar,
+                sindicoServer: sindicoVar,
+                blocoServer: blocoVar,
+                torreServer: torreVar,
+                apartamentoServer: apartamentoVar,
+                fkSindicoServer: fkSindicoVar
             })
         }).then(function (resposta) {
             console.log("resposta: ", resposta);
 
             if(resposta.ok){
 
-                setTimeout(() => {
-                    alert("Cadastrado com sucesso!");
-                    window.location.href = "login.html";
-                },2000)
+              let timerInterval
+          Swal.fire({
+            title: 'Cadastrado com sucesso',
+            html: 'Redirecionando em <b></b> milisegundos.',
+            icon: 'success',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+
+          setTimeout(() => {
+            window.location.href = "login.html";
+          },2000);
                 
             }else{
                 throw("Houve um erro ao tentar realizar o cadastro!")

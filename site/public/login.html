@@ -1,200 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logar-se SmartConecta</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <script
-      src="https://kit.fontawesome.com/89d28f01ec.js"
-      crossorigin="anonymous"
-    ></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logar-se SmartConecta</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/89d28f01ec.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
 
-    <header>
-        <div class="header login">
-            <!-- <img src="assets/" alt=""> -->
-            <a href="index.html"><h2>SmartConecta</h2></a>
+  <header>
+    <div class="header login">
+      <!-- <img src="assets/" alt=""> -->
+      <a href="index.html">
+        <h2>SmartConecta</h2>
+      </a>
 
-            <ul>
-                <a href="index.html"><li>Página Inicial</li></a>
-                <li>Quem Somos<img src="" alt=""></li>
-                <li>Nossa Solução</li>
-            </ul>
-        </div>
-    </header>
+      <ul>
+        <a href="index.html">
+          <li>Página Inicial</li>
+        </a>
+        <li>Quem Somos<img src="" alt=""></li>
+        <li>Nossa Solução</li>
+      </ul>
+    </div>
+  </header>
 
-    
 
-    <main class="mainLogin">
-        <div class="circulo"></div>
-        <div class="form">
-            <div class="headerLog">
-                <!-- <img src="assets/google-logo.png" alt=""> -->
-                <h1 class="titleAcess">Acesso à sua conta</h1>
-                <p>Bem-Vindo! Digite seus dados abaixo</p>
-            </div>
-            <form onsubmit="return false">
-                <p> 
-                    <label for="email_login">E-mail</label> <br>
-                    <input id="email_login" class="campo" name="email_login" required="required" type="email" placeholder="ex. contato@htmlecsspro.com"/>
-                </p>
-                
-                <p> 
-                    <label for="senha_login">Senha</label> <br>
-                    <input id="senha_login" class="campo" type="password" name="senha_login" required="required"  placeholder="********"/>
-                </p>
 
-                <!-- <input type="checkbox" id="remember" name="remember" checked> -->
-                <!-- <label for="remember" class="remember">Remember for 30 days</label> -->
+  <main class="mainLogin">
+    <div class="circulo"></div>
+    <div class="form">
+      <div class="headerLog">
+        <!-- <img src="assets/google-logo.png" alt=""> -->
+        <h1 class="titleAcess">Acesso à sua conta</h1>
+        <p>Bem-Vindo! Digite seus dados abaixo</p>
+      </div>
+      <form onsubmit="return false">
+        <p>
+          <label for="email_login">E-mail</label> <br>
+          <input id="email_login" class="campo" name="email_login" required="required" type="email"
+            placeholder="ex. contato@htmlecsspro.com" />
+        </p>
 
-                <p class="forgot">
-                    <a href="">Forgot Password</a>
-                </p>
+        <p>
+          <label for="senha_login">Senha</label> <br>
+          <input id="senha_login" class="campo" type="password" name="senha_login" required="required"
+            placeholder="********" />
+        </p>
 
-                <button  class="btnSignUp-Login" onclick="entrar()">Sign Up</button>
-                <br> <br>
-                <!-- <button class="btnSignUpGoogle"><img src="assets/google-logo.png" alt="">Sign in with Google</button> -->
+        <!-- <input type="checkbox" id="remember" name="remember" checked> -->
+        <!-- <label for="remember" class="remember">Remember for 30 days</label> -->
 
-                <p class="dontHave">Não tem uma conta? <a href="register.html"> Cadastre-se</a></p>
-            </form>
-        </div>
-    </main>
+        <p class="forgot">
+          <a href="">Forgot Password</a>
+        </p>
 
-    <footer>
-        <div class="filhoFooter">
-          <div class="redes">
-            <h2>Redes Sociais</h2>
-            <ul>
-              <li>
-                <i
-                  class="fa-brands fa-square-twitter fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a href="">Twitter</a>
-              </li>
-              <li>
-                <i
-                  class="fa-brands fa-square-instagram fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a href="">Instagram</a>
-              </li>
-              <li>
-                <i
-                  class="fa-brands fa-square-facebook fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a href="">Facebook</a>
-              </li>
-              <li>
-                <i class="fa-brands fa-linkedin fa-2xl" style="color: black;"></i
-                ><a href="">Linkedin</a>
-              </li>
-            </ul>
-          </div>
-  
-          <div class="acesso">
-            <h2>Acesso Rápido</h2>
-            <ul>
-              <li><a href="index.html">Página Inicial</a></li>
-              <li><a href="quemSomos.html">Quem Somos</a></li>
-              <li><a href="nossaSolucao.html">Nossa Solução</a></li>
-            </ul>
-          </div>
-  
-          <div class="contato">
-            <h2 id="contato">Contato</h2>
-            <ul>
-              <li>
-                <i
-                  class="fa-brands fa-square-whatsapp fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a href="#">(11) 4227-7816</a>
-              </li>
-              <li>
-                <i
-                  class="fa-solid fa-square-phone fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a href="#">(11) 4239-3200</a>
-              </li>
-              <li>
-                <i
-                  class="fa-solid fa-square-envelope fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a href="mailto:contato@smartconecta.com.br">E-mail</a>
-              </li>
-              <li>
-                <i
-                  class="fa-solid fa-location-dot fa-2xl"
-                  style="color: black;"
-                ></i
-                ><a
-                  href="https://www.google.com/maps/place/Universidade+Municipal+de+S%C3%A3o+Caetano+do+Sul+-+Campus+Concei%C3%A7%C3%A3o/@-23.6181097,-46.578926,15z/data=!4m2!3m1!1s0x0:0xb8b2280e637ac0d9?sa=X&ved=2ahUKEwj6lprA8ev-AhVBq5UCHSEJAUwQ_BJ6BAhHEAg"
-                  target="_blank">R. Conceição, 321 - Santo Antônio, São Caetano do Sul</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    
+        <button class="btnSignUp-Login" onclick="entrar()">Sign Up</button>
+        <br> <br>
+        <!-- <button class="btnSignUpGoogle"><img src="assets/google-logo.png" alt="">Sign in with Google</button> -->
+
+        <p class="dontHave">Não tem uma conta? <a href="register.html"> Cadastre-se</a></p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="filhoFooter">
+      <div class="redes">
+        <h2>Redes Sociais</h2>
+        <ul>
+          <li>
+            <i class="fa-brands fa-square-twitter fa-2xl" style="color: black;"></i><a href="">Twitter</a>
+          </li>
+          <li>
+            <i class="fa-brands fa-square-instagram fa-2xl" style="color: black;"></i><a href="">Instagram</a>
+          </li>
+          <li>
+            <i class="fa-brands fa-square-facebook fa-2xl" style="color: black;"></i><a href="">Facebook</a>
+          </li>
+          <li>
+            <i class="fa-brands fa-linkedin fa-2xl" style="color: black;"></i><a href="">Linkedin</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="acesso">
+        <h2>Acesso Rápido</h2>
+        <ul>
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="quemSomos.html">Quem Somos</a></li>
+          <li><a href="nossaSolucao.html">Nossa Solução</a></li>
+        </ul>
+      </div>
+
+      <div class="contato">
+        <h2 id="contato">Contato</h2>
+        <ul>
+          <li>
+            <i class="fa-brands fa-square-whatsapp fa-2xl" style="color: black;"></i><a href="#">(11) 4227-7816</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-square-phone fa-2xl" style="color: black;"></i><a href="#">(11) 4239-3200</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-square-envelope fa-2xl" style="color: black;"></i><a
+              href="mailto:contato@smartconecta.com.br">E-mail</a>
+          </li>
+          <li>
+            <i class="fa-solid fa-location-dot fa-2xl" style="color: black;"></i><a
+              href="https://www.google.com/maps/place/Universidade+Municipal+de+S%C3%A3o+Caetano+do+Sul+-+Campus+Concei%C3%A7%C3%A3o/@-23.6181097,-46.578926,15z/data=!4m2!3m1!1s0x0:0xb8b2280e637ac0d9?sa=X&ved=2ahUKEwj6lprA8ev-AhVBq5UCHSEJAUwQ_BJ6BAhHEAg"
+              target="_blank">R. Conceição, 321 - Santo Antônio, São Caetano do Sul</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
 </body>
+
 </html>
 
 <script>
 
-    function entrar(){
-        var emailVar = email_login.value;
-        var senhaVar = senha_login.value;
+  function entrar() {
+    var emailVar = email_login.value;
+    var senhaVar = senha_login.value;
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar)
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar)
 
-        fetch("/usuarios/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.ID_USUARIO = json.idUser;
+
+          let timerInterval
+          Swal.fire({
+            title: 'Logado com sucesso',
+            html: 'Redirecionando em <b></b> milisegundos.',
+            icon: 'success',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
             },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
-
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.EMAIL_USUARIO = json.email;
-                    sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.idUser;
-
-                    alert("Logado com sucesso");
-
-                    window.location.href = "home.html";
-                    
-                });
-            }else{
-                console.log("Houve um erro ao tentar realizar o login");
-
-                resposta.text().then(texto =>{
-                    console.erro(texto);
-                });
+            willClose: () => {
+              clearInterval(timerInterval)
             }
-        }).catch(function (erro){
-            console.log(erro);
-        })
-        return false;
-    }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+
+          setTimeout(() => {
+            window.location.href = "home.html";
+          },2000);
+
+        });
+      } else {
+        console.log("Houve um erro ao tentar realizar o login");
+
+        resposta.text().then(texto => {
+          console.erro(texto);
+        });
+      }
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+    return false;
+  }
 
 </script>
