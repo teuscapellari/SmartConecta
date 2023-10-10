@@ -525,7 +525,16 @@ h1{
     padding: 5px;
 }
 
-.histDesp h1 img, .histEntr h1 img{
+.saldo{
+    display: flex;
+    align-items: center;
+}
+
+.saldo span{
+    font-size: 25px;
+}
+
+.histDesp h1 img, .histEntr h1 img, .saldo img{
     width: 50px;
     margin-left: 20px;
 }
