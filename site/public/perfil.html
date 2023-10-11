@@ -22,33 +22,38 @@
 
             <!-- HOME -->
             <div class="iconHome" onclick="irHome()">
-                <img src="assets/home.png" alt="">
+              <img src="assets/home.png" alt="">
             </div>
-
+      
             <!-- DASHBOARD -->
             <div class="iconDash" onclick="irDash()">
-                <img src="assets/dashboard.png" alt="">
+              <img src="assets/dashboard.png" alt="">
             </div>
-
+      
+            <!-- ADD MORADOR -->
+            <div class="iconAdd" id="idiconAdd" onclick="irAddMora()">
+              <img src="assets/three-dots.png" alt="">
+            </div>
+      
             <hr>
-
+      
             <!-- PERFIL -->
             <div class="iconPerfil" onclick="irPerf()">
-                <img src="assets/user.png" alt="">
+              <img src="assets/user.png" alt="">
             </div>
-
+      
             <!-- LOGOUT -->
             <div class="iconLogout" onclick="logout()">
-                <img src="assets/import.png" alt=""> <!-- TROCAR DEPPOOOOOOOOIIIIISSSSSSS -->
+              <img src="assets/import.png" alt=""> <!-- TROCAR DEPPOOOOOOOOIIIIISSSSSSS -->
             </div>
-
-        </div>
+      
+          </div>
         <div class="contentHome">
             
             <div class="infoUser">
                 <div class="formUser">
 
-                    <div class="camposUser">
+                    <div class="camposUser addMorad">
 
                         <h1>Suas informações</h1>
 
@@ -60,6 +65,9 @@
 
                         <label for="Telefone">Telefone: </label>
                         <input type="tel" name="" id="ipt_telefone">
+
+                        <label for="">Senha</label>
+                        <input type="text" name="" id="ipt_senha">
 
                         <button onclick="alterarInfo()" class="btnAltInfo">Alterar</button>
                     </div>
@@ -78,24 +86,32 @@
         window.location.href = "index.html"
     }
 
+  if(sessionStorage.SINDICO == 0){
+    idiconAdd.style.display = 'none';
+  }
+
     function logout() {
-        sessionStorage.ID_USUARIO = 0;
-        sessionStorage.EMAIL_USUARIO = "";
-        sessionStorage.NOME_USUARIO = "";
-        window.location.href = "login.html";
-    }
+    sessionStorage.ID_USUARIO = 0;
+    sessionStorage.EMAIL_USUARIO = "";
+    sessionStorage.NOME_USUARIO = "";
+    window.location.href = "login.html";
+  }
 
-    function irPerf() {
-        window.location.href = "perfil.html";
-    }
+  function irHome(){
+    window.location.href = "home.html";
+  }
 
-    function irDash() {
-        window.location.href = "dashboard.html";
-    }
+  function irPerf() {
+    window.location.href = "perfil.html";
+  }
 
-    function irHome(){
-        window.location.href = "home.html";
-    }
+  function irAddMora(){
+    window.location.href = "adicionarMorador.html"
+  }
+
+  function irDash() {
+    window.location.href = "dashboard.html";
+  }
 
     var fkUser = sessionStorage.ID_USUARIO;
     selectInfo(fkUser);
@@ -122,6 +138,7 @@
                     ipt_email.value = json.email;
                     ipt_nome.value = json.nome;
                     ipt_telefone.value = json.telefone;
+                    ipt_senha.value = json.senha;
 
                     // alert("Logado com sucesso");
 
@@ -145,6 +162,7 @@
         var nomeVar = ipt_nome.value;
         var emailVar = ipt_email.value;
         var telefoneVar = ipt_telefone.value;
+        var senhaVar = ipt_senha.value;
 
         fetch("/usuarios/alterarInfo", {
             method: "POST",
@@ -155,6 +173,7 @@
                 nomeServer: nomeVar,
                 emailServer: emailVar,
                 telefoneServer: telefoneVar,
+                senhaServer: senhaVar,
                 fkUserServer: fkUser
             })
         }).then(function (resposta) {

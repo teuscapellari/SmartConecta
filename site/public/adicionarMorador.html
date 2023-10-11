@@ -13,6 +13,11 @@
       src="https://kit.fontawesome.com/89d28f01ec.js"
       crossorigin="anonymous"
     ></script> -->
+    <style>
+      .histDesp, .histEntr{
+        height: 80vh;
+      }
+    </style>
 
 </head>
 
@@ -22,7 +27,7 @@
     <div class="menu">
 
       <!-- HOME -->
-      <div class="iconHome">
+      <div class="iconHome" onclick="irHome()">
         <img src="assets/home.png" alt="">
       </div>
 
@@ -32,7 +37,7 @@
       </div>
 
       <!-- ADD MORADOR -->
-      <div class="iconAdd" onclick="irAddMora()">
+      <div class="iconAdd" id="idiconAdd" onclick="irAddMora()">
         <img src="assets/three-dots.png" alt="">
       </div>
 
@@ -71,28 +76,18 @@
 
               <label for="Nome">Nome:</label>
               <input type="text" name="" id="ipt_nome" required>
-
-              <br>
   
               <label for="Email">E-mail:</label>
               <input type="email" name="" id="ipt_email" required>
-
-              <br>
   
               <label for="Telefone">Telefone: </label>
               <input type="tel" name="" id="ipt_telefone" required>
-
-              <br>
   
               <label for="">Bloco:</label>
               <input type="text" name="" id="ipt_bloco">
-
-              <br>
   
               <label for="">Torre:</label>
               <input type="text" name="" id="ipt_torre">
-              
-              <br>
   
               <label for="">Apartamento:</label>
               <input type="text" name="" id="ipt_apartamento" required>
@@ -186,11 +181,22 @@
     window.location.href = "index.html"
   }
 
+  if(sessionStorage.SINDICO == 0){
+    idregDesp.style.display = 'none';
+    idregEntr.style.display = 'none';
+    idiconAdd.style.display = 'none';
+    window.location.href = "home.html";
+  }
+
   function logout() {
     sessionStorage.ID_USUARIO = 0;
     sessionStorage.EMAIL_USUARIO = "";
     sessionStorage.NOME_USUARIO = "";
     window.location.href = "login.html";
+  }
+
+  function irHome(){
+    window.location.href = "home.html";
   }
 
   function irPerf() {
@@ -199,6 +205,10 @@
 
   function irAddMora(){
     window.location.href = "adicionarMorador.html"
+  }
+
+  function irDash() {
+    window.location.href = "dashboard.html";
   }
 
   var fkUser = sessionStorage.ID_USUARIO;
@@ -228,12 +238,6 @@
     document.getElementById("myEntr").style.display = "none";
   }
 
-  function irDash() {
-    window.location.href = "dashboard.html";
-  }
-
-  var senhaGerada = 1234;
-
   function addMorad(){
     if(ipt_nome.value == ''){
       alert("Favor preencher o nome");
@@ -249,7 +253,7 @@
     }
         var nomeVar = ipt_nome.value;
         var emailVar = ipt_email.value;
-        var senhaVar = senhaGerada;
+        var senhaVar = gerarSenha();
         var telefoneVar = ipt_telefone.value;
         var sindicoVar = 0;
         var blocoVar = ipt_bloco.value;
@@ -376,6 +380,18 @@
     }).catch(function (resposta) {
       console.error(resposta);
     });
+  }
+
+  var password = "";
+  function gerarSenha(){
+    var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ!@";
+      var passwordLength = 15;
+      
+      for (var i = 0; i < passwordLength; i++) {
+        var randomNumber = Math.floor(Math.random() * chars.length);
+        password += chars.substring(randomNumber, randomNumber + 1);
+      }
+    return password;
   }
 
 

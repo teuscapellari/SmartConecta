@@ -109,10 +109,11 @@ function alterarInfo(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var telefone = req.body.telefoneServer;
+    var senha = req.body.senhaServer;
     var fkUser = req.body.fkUserServer;
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.alterarInfo(nome, email, telefone, fkUser)
+        usuarioModel.alterarInfo(nome, email, telefone, senha, fkUser)
             .then(
                 function (resultado) {
                     res.json(resultado);

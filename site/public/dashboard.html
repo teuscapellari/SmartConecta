@@ -46,6 +46,11 @@
         <img src="assets/dashboard.png" alt="">
       </div>
 
+      <!-- ADD MORADOR -->
+      <div class="iconAdd" id="idiconAdd" onclick="irAddMora()">
+        <img src="assets/three-dots.png" alt="">
+      </div>
+
       <hr>
 
       <!-- PERFIL -->
@@ -103,6 +108,14 @@
 
 <script>
 
+if (sessionStorage.ID_USUARIO == 0) {
+    window.location.href = "index.html"
+  }
+
+  if(sessionStorage.SINDICO == 0){
+    idiconAdd.style.display = 'none';
+  }
+
   function openDesp() {
     document.getElementById("myDesp").style.display = "block";
   }
@@ -118,14 +131,6 @@
     document.getElementById("myEntr").style.display = "none";
   }
 
-  function irDash() {
-    window.location.href = "dashboard.html";
-  }
-
-  function irHome() {
-    window.location.href = "home.html";
-  }
-
   function logout() {
     sessionStorage.ID_USUARIO = 0;
     sessionStorage.EMAIL_USUARIO = "";
@@ -133,8 +138,20 @@
     window.location.href = "login.html";
   }
 
+  function irHome(){
+    window.location.href = "home.html";
+  }
+
   function irPerf() {
     window.location.href = "perfil.html";
+  }
+
+  function irAddMora(){
+    window.location.href = "adicionarMorador.html"
+  }
+
+  function irDash() {
+    window.location.href = "dashboard.html";
   }
 
   function vizuDesp(){

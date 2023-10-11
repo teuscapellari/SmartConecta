@@ -22,7 +22,7 @@
     <div class="menu">
 
       <!-- HOME -->
-      <div class="iconHome">
+      <div class="iconHome" onclick="irHome()">
         <img src="assets/home.png" alt="">
       </div>
 
@@ -179,12 +179,20 @@
     window.location.href = "login.html";
   }
 
+  function irHome(){
+    window.location.href = "home.html";
+  }
+
   function irPerf() {
     window.location.href = "perfil.html";
   }
 
   function irAddMora(){
     window.location.href = "adicionarMorador.html"
+  }
+
+  function irDash() {
+    window.location.href = "dashboard.html";
   }
 
   if(sessionStorage.SINDICO == 0){
@@ -215,10 +223,6 @@
 
   function closeEntr() {
     document.getElementById("myEntr").style.display = "none";
-  }
-
-  function irDash() {
-    window.location.href = "dashboard.html";
   }
 
   function regDesp() {

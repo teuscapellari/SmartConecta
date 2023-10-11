@@ -32,13 +32,13 @@ function cadastrar(nome, email, senha, telefone, sindico, bloco, torre, apartame
     return database.executar(instrucao);
 }
 
-function alterarInfo(nome, email, telefone, fkUser) {
+function alterarInfo(nome, email, telefone, senha, fkUser) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():");
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        UPDATE usuario SET nome = '${nome}', email = '${email}', telefone = '${telefone}' WHERE idUser = ${fkUser};`;
+        UPDATE usuario SET nome = '${nome}', email = '${email}', telefone = '${telefone}', senha = '${senha}' WHERE idUser = ${fkUser};`;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
