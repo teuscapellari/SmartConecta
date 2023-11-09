@@ -74,7 +74,7 @@
             </button>
             <div class="dropdown-content" id="myDropdown">
               <a href="#" onclick="vizuDesp()">Despesas</a>
-              <a href="#" onclick="vizuEntr()">Entradas</a>
+              <a href="#" onclick="vizuEntr(), graficoEntr()">Entradas</a>
               <a href="#" onclick="vizuComp()">Comparação</a>
             </div>
             </div> 
@@ -174,16 +174,108 @@ if (sessionStorage.ID_USUARIO == 0) {
 
   nomeUser.innerHTML = sessionStorage.NOME_USUARIO;
 
+  var fkUser;
+
+  if(sessionStorage.SINDICO == 0){
+    fkUser = sessionStorage.FKSINDICO;
+  }
+  else{
+    fkUser = sessionStorage.ID_USUARIO;
+  }
+
+  var labelsDesp = [];
+  var dataDesp = [];
+
+  setInterval(() =>{
+    selectDesp(fkUser);
+    selectEntr(fkUser);
+  },100)
+  
+
+
+  function selectDesp(fkUser) {
+    fetch(`/despesa/selectDesp/${fkUser}`,
+      {
+        cache: "no-store",
+      }
+    ).then(function (resposta) {
+
+      if (resposta.ok) {
+        if (resposta.status == 204) {
+          // var feed = document.getElementById("tabelaMorad");
+          // resultadosQuiz.style.display = 'flex';
+          // resultadosQuiz.style.color = '#FFFFFF';
+          // var mensagem = document.createElement("p");
+          // mensagem.innerHTML = "Você ainda não possui moradores :)" //SE NÂO APARECER NADA, MUDAR AQUI
+          // feed.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+          alert("Nenhum resultado encontrado :/")
+        }
+
+        resposta.json().then(function (resposta) {
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+          // var feed = document.getElementById("tableMorad");
+          // var main = document.getElementById("tableMorad");
+          for (let i = 0; i < resposta.length; i++) {
+            var publicacao = resposta[i];
+
+            var dataTable = new Date(publicacao.dataDesp);
+            dataTable = dataTable.toLocaleDateString('pt-BR');
+
+            labelsDesp[i] = (dataTable);
+            dataDesp[i] = ((publicacao.valorDesp));
+
+            // var linhaResultado = document.createElement("tr");
+            // var nome = document.createElement("td");
+            // var email = document.createElement("td");
+            // var telefone = document.createElement("td");
+            // var apartamento = document.createElement("td");
+            // var descricao = document.createElement("td");
+            // var fkUsuarioElement = document.createElement("p");
+            // var dataRespElement = document.createElement("p");
+
+            // nome.innerHTML = `${publicacao.nome}`;
+            // email.innerHTML = `${publicacao.email}`;
+            // telefone.innerHTML = `${publicacao.telefone}`;
+            // apartamento.innerHTML = `${publicacao.apartamento}`;
+            // descricao.innerHTML = `${publicacao.descEntr}`;
+            // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+            // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+            // divResultado.className = "resultadosQuiz";
+
+            // main.appendChild(linhaResultado);
+            // linhaResultado.appendChild(nome);
+            // linhaResultado.appendChild(email);
+            // linhaResultado.appendChild(telefone);
+            // linhaResultado.appendChild(apartamento);
+            // linhaResultado.appendChild(descricao);
+            // divResultado.appendChild(fkUsuarioElement);
+            // divResultado.appendChild(dataRespElement);
+          }
+        });
+      } else {
+        throw ("Houve um erro na API")
+      }
+    }).catch(function (resposta) {
+      console.error(resposta);
+    });
+  }
+
+
+  
+  var meuGraficoDesp;
 
   const ctxDesp = document.getElementById('myChartDesp');
-
-  new Chart(ctxDesp, {
+  setInterval(() => {
+   meuGraficoDesp = new Chart(ctxDesp, {
     type: 'line',
     data: {
-      labels: ['15/08/23', '16/08/23', '17/08/23', '18/08/23', '19/08/23', '20/08/23', '21/08/23', '22/08/23', '23/08/23', '24/08/23', '25/08/23', '26/08/23', '27/08/23', '28/08/23', '29/08/23'],
+      labels: [labelsDesp[0], labelsDesp[1], labelsDesp[2], labelsDesp[3], labelsDesp[4], labelsDesp[5], labelsDesp[6]],
       datasets: [{
         label: 'Despesas',
-        data: [1500, 150, 96.45, 156.23, 10.48, 36.45, 856.02, 364.89, 142.00, 644.13, 996.45, 120.62, 845.63, 852.52, 7896],
+        data: [dataDesp[0], dataDesp[1], dataDesp[2], dataDesp[3], dataDesp[4], dataDesp[5], dataDesp[6]],
         borderColor: '#FF0000',
         backgroundColor: '#FF0000',
         tension: 0.1,
@@ -198,16 +290,107 @@ if (sessionStorage.ID_USUARIO == 0) {
       }
     }
   });
+  }, 1000)
 
-  const ctxEntr = document.getElementById('myChartEntr');
+  setInterval(() =>{
+    meuGraficoDesp.destroy();
+  }, 5500)
 
-  new Chart(ctxEntr, {
+  
+
+
+
+  var labelsEntr = [];
+  var dataEntr = [];
+
+
+  function selectEntr(fkUser) {
+    fetch(`/entrada/selectEntr/${fkUser}`,
+      {
+        cache: "no-store",
+      }
+    ).then(function (resposta) {
+
+      if (resposta.ok) {
+        if (resposta.status == 204) {
+          // var feed = document.getElementById("tabelaMorad");
+          // resultadosQuiz.style.display = 'flex';
+          // resultadosQuiz.style.color = '#FFFFFF';
+          // var mensagem = document.createElement("p");
+          // mensagem.innerHTML = "Você ainda não possui moradores :)" //SE NÂO APARECER NADA, MUDAR AQUI
+          // feed.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+          alert("Nenhum resultado encontrado :/")
+        }
+
+        resposta.json().then(function (resposta) {
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+          // var feed = document.getElementById("tableMorad");
+          // var main = document.getElementById("tableMorad");
+          for (let i = 0; i < resposta.length; i++) {
+            var publicacao = resposta[i];
+
+            var dataTable = new Date(publicacao.dataEntr);
+            dataTable = dataTable.toLocaleDateString('pt-BR');
+
+            labelsEntr[i] = (dataTable);
+            dataEntr[i] = ((publicacao.valorEntr));
+
+            // var linhaResultado = document.createElement("tr");
+            // var nome = document.createElement("td");
+            // var email = document.createElement("td");
+            // var telefone = document.createElement("td");
+            // var apartamento = document.createElement("td");
+            // var descricao = document.createElement("td");
+            // var fkUsuarioElement = document.createElement("p");
+            // var dataRespElement = document.createElement("p");
+
+            // nome.innerHTML = `${publicacao.nome}`;
+            // email.innerHTML = `${publicacao.email}`;
+            // telefone.innerHTML = `${publicacao.telefone}`;
+            // apartamento.innerHTML = `${publicacao.apartamento}`;
+            // descricao.innerHTML = `${publicacao.descEntr}`;
+            // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
+            // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
+
+            // divResultado.className = "resultadosQuiz";
+
+            // main.appendChild(linhaResultado);
+            // linhaResultado.appendChild(nome);
+            // linhaResultado.appendChild(email);
+            // linhaResultado.appendChild(telefone);
+            // linhaResultado.appendChild(apartamento);
+            // linhaResultado.appendChild(descricao);
+            // divResultado.appendChild(fkUsuarioElement);
+            // divResultado.appendChild(dataRespElement);
+          }
+        });
+      } else {
+        throw ("Houve um erro na API")
+      }
+    }).catch(function (resposta) {
+      console.error(resposta);
+    });
+  }
+
+
+
+
+
+
+  var meuGraficoEntr;
+
+  function graficoEntr(){
+    const ctxEntr = document.getElementById('myChartEntr');
+    setInterval(() =>{
+    meuGraficoEntr = new Chart(ctxEntr, {
     type: 'line',
     data: {
-      labels: ['15/08/23', '16/08/23', '17/08/23', '18/08/23', '19/08/23', '20/08/23', '21/08/23', '22/08/23', '23/08/23', '24/08/23', '25/08/23', '26/08/23', '27/08/23', '28/08/23', '29/08/23'],
+      labels: [labelsEntr[0], labelsEntr[1], labelsEntr[2], labelsEntr[3], labelsEntr[4], labelsEntr[5], labelsEntr[6]],
       datasets: [{
         label: 'Entradas',
-        data: [2000, 400, 23.78, 16.23, 109.48, 386.45, 86.02, 3604.89, 14.00, 44.13, 96.45, 830.62, 65.63, 82.52, 5096],
+        data: [dataEntr[0], dataEntr[1], dataEntr[2], dataEntr[3], dataEntr[4], dataEntr[5], dataEntr[6]],
         borderColor: '#00FF00',
         backgroundColor: '#00FF00',
         tension: 0.1,
@@ -222,6 +405,14 @@ if (sessionStorage.ID_USUARIO == 0) {
       }
     }
   });
+}, 1000);
+  }
+
+  setInterval(() =>{
+    meuGraficoEntr.destroy();
+  }, 5500)
+
+  
 
   const ctxComp = document.getElementById('myChartComp');
 

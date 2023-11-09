@@ -8,15 +8,22 @@ CREATE TABLE Usuario(
     nome VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL UNIQUE,
     senha VARCHAR(15) NOT NULL,
-    telefone VARCHAR(15)
+    sindico CHAR(1) NOT NULL,
+    telefone VARCHAR(15) NOT NULL,
+    bloco VARCHAR(45),
+    torre VARCHAR(45),
+    apartamento VARCHAR(10),
+    fkSindico INT,
+    FOREIGN KEY(fkSindico) REFERENCES Usuario(idUser)
 );
+
 
 CREATE TABLE Despesa(
 	idDesp INT PRIMARY KEY AUTO_INCREMENT,
     nomeDesp VARCHAR(45) NOT NULL,
     dataDesp DATE NOT NULL,
     horaDesp TIME,
-    valorDesp DECIMAL(8,2) NOT NULL,
+    valorDesp DECIMAL(6,2) NOT NULL,
     descDesp VARCHAR(200) NOT NULL,
     fkUser INT,
     FOREIGN KEY(fkUser) REFERENCES Usuario(idUser)
@@ -35,3 +42,4 @@ CREATE TABLE Entrada(
 
 select * from Usuario;
 select * from Despesa;
+select * from Entrada;

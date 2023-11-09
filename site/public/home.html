@@ -233,6 +233,8 @@
     var descVar = ipt_descDesp.value;
     var fkUserVar = sessionStorage.ID_USUARIO;
 
+    alert(dataVar)
+
     fetch("/despesa/registrar", {
       method: "POST",
       headers: {
@@ -401,8 +403,10 @@
             somaDespesa = parseFloat(somaDespesa) + parseFloat(publicacao.valorDesp);
             valorDespesa.innerHTML = 'R$' + parseFloat(somaDespesa);
 
+            var dataTable = new Date(publicacao.dataDesp);
+            dataTable = dataTable.toLocaleDateString('pt-BR');
             nome.innerHTML = `${publicacao.nomeDesp}`;
-            data.innerHTML = `${publicacao.dataDesp}`;
+            data.innerHTML = `${dataTable}`;
             hora.innerHTML = `${publicacao.horaDesp}`;
             valor.innerHTML = `R$${publicacao.valorDesp}`;
             descricao.innerHTML = `${publicacao.descDesp}`;
@@ -469,8 +473,10 @@
             somaEntrada = parseFloat(somaEntrada) + parseFloat(publicacao.valorEntr);
             valorEntrada.innerHTML = 'R$' + parseFloat(somaEntrada);
 
+            var dataTable = new Date(publicacao.dataEntr);
+            dataTable = dataTable.toLocaleDateString('pt-BR');
             nome.innerHTML = `${publicacao.nomeEntr}`;
-            data.innerHTML = `${publicacao.dataEntr}`;
+            data.innerHTML = `${dataTable}`;
             hora.innerHTML = `${publicacao.horaEntr}`;
             valor.innerHTML = `R$${publicacao.valorEntr}`;
             descricao.innerHTML = `${publicacao.descEntr}`;
@@ -511,10 +517,4 @@
     vizuSaldo.innerHTML = 'R$' + parseFloat(saldo);
   }  
   }, 500);
-
-  
-
-
-  
-
 </script>

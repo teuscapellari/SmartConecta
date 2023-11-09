@@ -328,10 +328,10 @@
 
       if (resposta.ok) {
         if (resposta.status == 204) {
-          var feed = document.getElementById("tableMorad");
+          var feed = document.getElementById("tabelaMorad");
           // resultadosQuiz.style.display = 'flex';
           // resultadosQuiz.style.color = '#FFFFFF';
-          var mensagem = document.createElement("td");
+          var mensagem = document.createElement("p");
           mensagem.innerHTML = "Você ainda não possui moradores :)" //SE NÂO APARECER NADA, MUDAR AQUI
           feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
