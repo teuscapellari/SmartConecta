@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <!-- <script
       src="https://kit.fontawesome.com/89d28f01ec.js"
@@ -181,7 +182,28 @@
 
             if(resposta.ok){
 
-                alert("Alterado com sucesso!")
+              let timerInterval
+            Swal.fire({
+            title: 'Alterado com sucesso',
+            icon: 'success',
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
 
                 // setTimeout(() => {
                 //     alert("Cadastrado com sucesso!");

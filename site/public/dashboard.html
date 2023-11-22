@@ -202,12 +202,6 @@ if (sessionStorage.ID_USUARIO == 0) {
 
       if (resposta.ok) {
         if (resposta.status == 204) {
-          // var feed = document.getElementById("tabelaMorad");
-          // resultadosQuiz.style.display = 'flex';
-          // resultadosQuiz.style.color = '#FFFFFF';
-          // var mensagem = document.createElement("p");
-          // mensagem.innerHTML = "Você ainda não possui moradores :)" //SE NÂO APARECER NADA, MUDAR AQUI
-          // feed.appendChild(mensagem);
           throw "Nenhum resultado encontrado!!";
           alert("Nenhum resultado encontrado :/")
         }
@@ -215,8 +209,6 @@ if (sessionStorage.ID_USUARIO == 0) {
         resposta.json().then(function (resposta) {
           console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-          // var feed = document.getElementById("tableMorad");
-          // var main = document.getElementById("tableMorad");
           for (let i = 0; i < resposta.length; i++) {
             var publicacao = resposta[i];
 
@@ -225,34 +217,6 @@ if (sessionStorage.ID_USUARIO == 0) {
 
             labelsDesp[i] = (dataTable);
             dataDesp[i] = ((publicacao.valorDesp));
-
-            // var linhaResultado = document.createElement("tr");
-            // var nome = document.createElement("td");
-            // var email = document.createElement("td");
-            // var telefone = document.createElement("td");
-            // var apartamento = document.createElement("td");
-            // var descricao = document.createElement("td");
-            // var fkUsuarioElement = document.createElement("p");
-            // var dataRespElement = document.createElement("p");
-
-            // nome.innerHTML = `${publicacao.nome}`;
-            // email.innerHTML = `${publicacao.email}`;
-            // telefone.innerHTML = `${publicacao.telefone}`;
-            // apartamento.innerHTML = `${publicacao.apartamento}`;
-            // descricao.innerHTML = `${publicacao.descEntr}`;
-            // fkUsuarioElement.innerHTML = `Nome do Usuário: ${publicacao.nome}`;
-            // dataRespElement.innerHTML = `Data de resposta: ${publicacao.dataResp}`;
-
-            // divResultado.className = "resultadosQuiz";
-
-            // main.appendChild(linhaResultado);
-            // linhaResultado.appendChild(nome);
-            // linhaResultado.appendChild(email);
-            // linhaResultado.appendChild(telefone);
-            // linhaResultado.appendChild(apartamento);
-            // linhaResultado.appendChild(descricao);
-            // divResultado.appendChild(fkUsuarioElement);
-            // divResultado.appendChild(dataRespElement);
           }
         });
       } else {
