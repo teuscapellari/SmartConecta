@@ -8,6 +8,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
   <!-- <script
       src="https://kit.fontawesome.com/89d28f01ec.js"
@@ -609,38 +610,72 @@
 
   // EMAIL --------------------------
 
+  //Faça uma função que envia email
+
+  
 
   function enviarEmail(emailVar, senhaVar){
+    var message = `
+    Seja Bem-Vindo(a) ao sistema SmartConecta :)
+    \nSeu cadastro foi realizado com sucesso pelo síndico ${sessionStorage.NOME_USUARIO}
+    \nSeguem os dados de acesso ao nosso sistema:
+     \nEmail: ${emailVar} \n\nSenha: ${senhaVar}
+     \n\nRecomendamos trocar a senha ao acessar o sistema.
+     \n\nAtenciosamente, equipe SmartConecta.`
 
-    const nodemailer = require("nodemailer");
-
-    let transporter = nodemailer.createTransport({
-    
-    host: 'smtp.gmail.com',
-    // service: 'gmail',
-    port: 587,
-    secure: true,
-    auth:{
-    user: 'smart.conectaUSCS@gmail.com',
-    pass: 'SmartConectaUSCS1!' }
-    
-    });
-
-    transporter.sendMail({
-    
-    from: 'SmartConecta <smart.conectaUSCS@gmail.com>',
-    to: `${emailVar}`,
-    subject: 'SmartConecta',
-    text: `Seja Bem-Vindo(a) ao sistema SmartConecta :)
-        \nPara acessar nosso sistema utilize seu e-mail: ${emailVar} e sua senha: ${senhaVar}.
-        \n\nRecomendamos trocar a senha ao acessar o sistema.
-        \n\nAtenciosamente, equipe SmartConecta.`
-    
-    }).then(message => {
-      console.log(message);
-    }).catch(err => {
-      console.log(err);
-    })
+    window.open(`mailto:${emailVar}?subject=SmartConecta&body=` + encodeURIComponent(message));
   }
+
+  // function enviarEmail(emailVar, senhaVar){
+  //   Email.send({
+  //               Host: "smtp.gmail.com",
+  //               Username: "smart.conectaUSCS@gmail.com",
+  //               Password: "SmartConectaUSCS1!",
+  //               To: `${emailVar}`,
+  //               From: "smart.conectaUSCS@gmail.com",
+  //               Subject: "SmartConecta",
+  //               Body: `Seja Bem-Vindo(a) ao sistema SmartConecta :)
+  //               \nPara acessar nosso sistema utilize seu e-mail: ${emailVar} e sua senha: ${senhaVar}.
+  //               \n\nRecomendamos trocar a senha ao acessar o sistema.
+  //               \n\nAtenciosamente, equipe SmartConecta.`,
+  //           })
+  //               .then(function (message) {
+  //                   alert(emailVar)
+  //               });
+  // }
+
+
+  // function enviarEmail(emailVar, senhaVar){
+
+  //   const nodemailer = require("nodemailer");
+
+  //   let transporter = nodemailer.createTransport({
+    
+  //   host: 'smtp.gmail.com',
+  //   // service: 'gmail',
+  //   port: 587,
+  //   secure: true,
+  //   auth:{
+  //   user: 'smart.conectaUSCS@gmail.com',
+  //   pass: 'SmartConectaUSCS1!' }
+    
+  //   });
+
+  //   transporter.sendMail({
+    
+  //   from: 'SmartConecta <smart.conectaUSCS@gmail.com>',
+  //   to: `${emailVar}`,
+  //   subject: 'SmartConecta',
+  //   text: `Seja Bem-Vindo(a) ao sistema SmartConecta :)
+  //       \nPara acessar nosso sistema utilize seu e-mail: ${emailVar} e sua senha: ${senhaVar}.
+  //       \n\nRecomendamos trocar a senha ao acessar o sistema.
+  //       \n\nAtenciosamente, equipe SmartConecta.`
+    
+  //   }).then(message => {
+  //     console.log(message);
+  //   }).catch(err => {
+  //     console.log(err);
+  //   })
+  // }
 
 </script>
