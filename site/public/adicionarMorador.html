@@ -60,10 +60,10 @@
         <h3>Olá, <span id="nomeUser" class="nomeUser"></span></h3>
         <div class="registrosDiv">
           <div class="regDesp">
-            
+
           </div>
           <div class="regEntr">
-            
+
         </div>
         </div>
       </div>
@@ -77,22 +77,22 @@
 
               <label for="Nome">Nome:</label>
               <input type="text" name="" id="ipt_nome" required>
-  
+
               <label for="Email">E-mail:</label>
               <input type="email" name="" id="ipt_email" required>
-  
+
               <label for="Telefone">Telefone: </label>
               <input type="tel" name="" id="ipt_telefone" required>
-  
+
               <label for="">Bloco:</label>
               <input type="text" name="" id="ipt_bloco">
-  
+
               <label for="">Torre:</label>
               <input type="text" name="" id="ipt_torre">
-  
+
               <label for="">Apartamento:</label>
               <input type="text" name="" id="ipt_apartamento" required>
-  
+
               <button onclick="addMorad()" class="addMoradBtn">Adicionar Morador</button>
             </form>
 
@@ -245,7 +245,7 @@
     }
     if(ipt_email.value == ''){
       alert("Favor preencher o e-mail");
-    } 
+    }
     if(ipt_telefone.value == ''){
       alert("Favor preencher o telefone");
     }
@@ -281,9 +281,9 @@
         }).then(function (resposta) {
             console.log("resposta: ", resposta);
 
-            if(resposta.ok){ 
+            if(resposta.ok){
 
-              enviarEmail(emailVar, senhaVar);
+              //enviarEmail(emailVar, senhaVar);
 
             let timerInterval
           Swal.fire({
@@ -311,8 +311,8 @@
 
           setTimeout(() => {
             window.location.reload();
-          },1000);
-                
+          },500);
+
             }else{
                 throw("Houve um erro ao tentar realizar o cadastro!")
             }
@@ -389,7 +389,7 @@
   function gerarSenha(){
     var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJLMNOPQRSTUVWXYZ!@";
       var passwordLength = 15;
-      
+
       for (var i = 0; i < passwordLength; i++) {
         var randomNumber = Math.floor(Math.random() * chars.length);
         password += chars.substring(randomNumber, randomNumber + 1);
@@ -612,7 +612,7 @@
 
   //Faça uma função que envia email
 
-  
+
 
   function enviarEmail(emailVar, senhaVar){
     var message = `
@@ -650,7 +650,7 @@
   //   const nodemailer = require("nodemailer");
 
   //   let transporter = nodemailer.createTransport({
-    
+
   //   host: 'smtp.gmail.com',
   //   // service: 'gmail',
   //   port: 587,
@@ -658,11 +658,11 @@
   //   auth:{
   //   user: 'smart.conectaUSCS@gmail.com',
   //   pass: 'SmartConectaUSCS1!' }
-    
+
   //   });
 
   //   transporter.sendMail({
-    
+
   //   from: 'SmartConecta <smart.conectaUSCS@gmail.com>',
   //   to: `${emailVar}`,
   //   subject: 'SmartConecta',
@@ -670,7 +670,7 @@
   //       \nPara acessar nosso sistema utilize seu e-mail: ${emailVar} e sua senha: ${senhaVar}.
   //       \n\nRecomendamos trocar a senha ao acessar o sistema.
   //       \n\nAtenciosamente, equipe SmartConecta.`
-    
+
   //   }).then(message => {
   //     console.log(message);
   //   }).catch(err => {
